@@ -67,6 +67,7 @@ Page {
                         }
                     }
                     onExploded: {
+                        tutorial.play()
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -88,6 +89,11 @@ Page {
                 delegate: Debris{}
             }
         }
+    }
+    Tutorial{
+        id:tutorial
+        handX: statusBar.x + 100
+        handY: statusBar.y + 100
     }
 
     GameModel{
@@ -191,4 +197,5 @@ Page {
     onSparksChanged: {
         statusBar.sparksDigit.number = gamePlay.sparks
     }
+
 }

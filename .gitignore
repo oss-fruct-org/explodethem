@@ -2,7 +2,6 @@ Makefile
 moc
 obj
 debian
-explodethem
 explodethem_1.0.0_armel.changes
 explodethem_1.0.0_armel.deb
 explodethem.pro.user
