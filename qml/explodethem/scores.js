@@ -37,7 +37,7 @@ function reset(){
     });
     db.transaction(function(tx) {
         for(var i=0; i<10; i++)
-            tx.executeSql('INSERT INTO highScores VALUES(?, ?, ?)', [ i+1, '', 0 ]);
+            tx.executeSql('INSERT INTO highScores VALUES(?, ?, ?)', [ i+1, '', -1 ]);
     });
     highScoresModel.clear()
     updateScoreList()
@@ -55,9 +55,8 @@ function updateScoreList(){
 
     for(var i = 0; i<rs.rows.length;i++) {
         var rec = rs.rows.item(i);
-        if(rec.score >0){
-        console.log(rec.score)
-        highScoresModel.set(i, {"name": rec.name, "score":rec.score})
+        if(!(rec.score < 0)){
+            highScoresModel.set(i, {"name": rec.name, "score":rec.score})
         }
     }
 }

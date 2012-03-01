@@ -38,8 +38,8 @@ PageStackWindow {
     QueryDialog {
         id: aboutDialog
         icon: "images/about.png"
-        titleText: qsTr("About")
-        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\n of Petrozavodsk State University.\n The main developer is Artemov Nikita")
+        titleText: qsTr("Explode Them 1.0")
+        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.\n The main developer is Artemov Nikita")
         onPrivateClicked: {
             aboutDialog.close()
         }
