@@ -85,17 +85,16 @@ Rectangle {
     ]
     transitions: [
         Transition {
+            ScriptAction {script: {bang.opacity = 0.0}}
             PropertyAnimation{properties: "height,width"; duration: 500; easing.type: Easing.InQuad}
-            PropertyAnimation{properties: "source"; duration: 500; easing.type: Easing.InQuad}
         },Transition {
-            from: "big"; to: "none"
+            to: "none"
             SequentialAnimation {
                 //ScriptAction { script: bangSound.play(); }
                 ScriptAction { script: cellMain.exploded(); }
                 ScriptAction {
                     script: {
                         bang.opacity = 1.0
-                        //bang.visible = true
                     }
                 }
                 PropertyAnimation {
@@ -106,7 +105,6 @@ Rectangle {
                 ScriptAction {
                     script: {
                         bang.opacity = 0.0
-                        //bang.visible = false
                     }
                 }
             }

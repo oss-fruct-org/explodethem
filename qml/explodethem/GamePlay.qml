@@ -60,6 +60,7 @@ Page {
                                     gameOverDialog.open()
                                 }
                                 gameModel.touch(index)
+                                //gameModel.test()
                             }
                         } else {
                             if(!noneSound.playing)
@@ -94,6 +95,7 @@ Page {
         id:tutorial
         handX: statusBar.x + 100
         handY: statusBar.y + 100
+        enabled: false
     }
 
     GameModel{

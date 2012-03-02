@@ -63,7 +63,7 @@ function check(i,model){
     }
     if(upD !== NULL ){
         isMoved = true
-        if(model.get(i).upD > -1 && upD < COL_COUNT*ROW_COUNT){
+        if(upD > -1 && upD < COL_COUNT*ROW_COUNT){
             if(model.get(upD).t > 0 && model.get(upD).t < 3 ){
                 model.set(model.get(i).upD,{t: model.get(upD).t+1})
                 model.set(i,{upD: NULL})
@@ -80,7 +80,7 @@ function check(i,model){
     }
     if(leftD !== NULL ){
         isMoved = true
-        if( leftD >  i - i%COL_COUNT - 1){
+        if(leftD >  i - i%COL_COUNT - 1){
             if(model.get(leftD).t > 0 && model.get(leftD).t < 3 ){
                 model.set(leftD,{t: model.get(leftD).t+1})
                 model.set(i,{leftD: NULL})

@@ -41,6 +41,11 @@ Item{
         worker.sendMessage(msg);
 
     }
+    function test(){
+        for(var i = 0;i < UI.COL_COUNT*UI.ROW_COUNT; i++){
+                listModel.set(i,{t: 0, upD:1, downD:1, rightD:1,leftD:1})
+        }
+    }
 
     function goNextLevel(){
         timer.stop()
