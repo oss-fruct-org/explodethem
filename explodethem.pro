@@ -1,5 +1,9 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml/explodethem
+symbian{
+    folder_01.source = qml/symbian
+} else {
+    folder_01.source = qml/meego
+}
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
@@ -23,13 +27,13 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # CONFIG += mobility
 # MOBILITY +=
 
-# Speed up launching on MeeGo/Harmattan when using applauncherd daemon
-CONFIG += qdeclarative-boostable \
-        mobility
+symbian{
+    CONFIG += qt-components
+} esle {
+    CONFIG += qdeclarative-boostable \
+}
 
-# Add dependency to Symbian components
-# CONFIG += qt-components
-
+CONFIG +=  mobility
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp
 
@@ -37,6 +41,7 @@ SOURCES += main.cpp
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
+!symbian{
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/rules \
     qtc_packaging/debian_harmattan/README \
@@ -45,3 +50,4 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/control \
     qtc_packaging/debian_harmattan/compat \
     qtc_packaging/debian_harmattan/changelog
+}
