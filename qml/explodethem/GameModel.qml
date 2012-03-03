@@ -15,6 +15,7 @@ Item{
     signal scoreUp
     signal sparksUp
     signal stopped
+    signal bang
 
     function getRandomInt(min, max){
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -68,6 +69,8 @@ Item{
                 gameModel.__inProgress = false
                 gameModel.stopped()
             }
+            if(messageObject.needBang)
+                bang()
         }
     }
 

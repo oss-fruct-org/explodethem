@@ -1,6 +1,7 @@
 
 var COL_COUNT = 6;
 var ROW_COUNT = 8;
+var needBang = false
 var NULL = -30
 var needNext = true;
 var isMoved = false;
@@ -8,16 +9,18 @@ WorkerScript.onMessage = function(msg) {
     if (msg.action === 'move'){
         needNext = true;
         isMoved = false;
+        needBang = false
         for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
             check(i,msg.model)
             if(msg.model.get(i).t !== 0)
                 needNext = false
         }
-        WorkerScript.sendMessage({ 'needNext': needNext, 'isMoved':isMoved })
+        WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': needNext, 'isMoved':isMoved })
     } else if(msg.action === 'touch'){
         var type = msg.model.get(msg.id).t
         if(type === 3){
             msg.model.set(msg.id, {t: 0, upD: msg.id - COL_COUNT, downD: msg.id+ COL_COUNT, leftD: msg.id-1,rightD: msg.id+1})
+            WorkerScript.sendMessage({ 'needBang': true, 'needNext': false, 'isMoved': true})
         } else if (type > 0){
             msg.model.set(msg.id, {t: type+1})
         }
@@ -54,6 +57,7 @@ function check(i,model){
             } else if(model.get(downD).t === 3) {
                 model.set(downD,{t: 0,downD: downD,upD: downD,leftD: downD ,rightD: downD })
                 model.set(i,{downD: NULL})
+                needBang = true
             }
             else
                 model.set(i,{downD: downD + COL_COUNT})
@@ -71,6 +75,7 @@ function check(i,model){
                 model.set(upD,{t: 0,upD: upD - COL_COUNT,downD: upD + COL_COUNT,
                               leftD: upD - 1,rightD: upD + 1})
                 model.set(i,{upD: NULL})
+                needBang = true
             }
             else
                 model.set(i,{upD: upD - COL_COUNT})
@@ -88,6 +93,7 @@ function check(i,model){
                 model.set(leftD, {t: 0, upD: leftD - COL_COUNT,downD: leftD + COL_COUNT,
                               leftD: leftD - 1, rightD: leftD + 1})
                 model.set(i,{leftD: NULL})
+                needBang = true
             }
             else
                 model.set(i,{leftD: leftD - 1})
@@ -104,6 +110,7 @@ function check(i,model){
             } else if(model.get(rightD).t === 3) {
                 model.set(rightD, {t: 0,upD: rightD,downD: rightD,leftD: rightD,rightD: rightD})
                 model.set(i,{rightD: NULL})
+                needBang = true
             }
             else
                 model.set(i,{rightD: rightD + 1})

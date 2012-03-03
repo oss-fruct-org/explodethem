@@ -12,7 +12,7 @@ Page {
     property int count: 0
     property int bestScore: 0
     property int sparks
-
+    property bool touched: false
     function init(){
         level = 1
         score = 0
@@ -27,8 +27,12 @@ Page {
     orientationLock: PageOrientation.LockPortrait
 
     SoundEffect  {
+        id: bombSound
+        source: "audio/bomb4.wav"
+    }
+    SoundEffect  {
         id: noneSound
-        source: "audio/none.mp3"
+        source: "audio/none.wav"
     }
     Image {
         id:background
@@ -59,6 +63,7 @@ Page {
                                 if(t !== 3 && sparks === 0){
                                     gameOverDialog.open()
                                 }
+                                touched = true
                                 gameModel.touch(index)
                                 //gameModel.test()
                             }
@@ -68,7 +73,8 @@ Page {
                         }
                     }
                     onExploded: {
-                        tutorial.play()
+                        if(touched){
+
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -76,6 +82,7 @@ Page {
                             } else {
                                 gamePlay.count++
                             }
+                        }
                     }
                 }
             }
@@ -95,21 +102,24 @@ Page {
         id:tutorial
         handX: statusBar.x + 100
         handY: statusBar.y + 100
-        enabled: false
+        visible: false
     }
 
     GameModel{
         id:gameModel
         onNextlevel: {
+            bombSound.stop()
             gamePlay.sparks++
             nextLevelDialog.open()
         }
-        onScoreUp: {
-            /*if(!bangSound.playing)
-                bangSound.play()*/
-            //bangSound.loops++
+        onBang: {
+            if(!bombSound.playing)
+                bombSound.play()
         }
+
         onStopped: {
+            bombSound.stop()
+            touched = false
             if(gamePlay.sparks == 0)
                 gameOverDialog.open()
         }
@@ -129,9 +139,9 @@ Page {
         id: gameOverDialog
         signal privateClicked
         content:Column{
-            /*Image{
+            Image{
                 source: "images/bomb5.png"
-            }*/
+            }
             Text{
                 text:qsTr("Your score: ")+gamePlay.score+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
