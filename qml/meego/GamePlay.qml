@@ -17,6 +17,7 @@ Page {
         level = 1
         score = 0
         sparks = UI.START_COUNT_SPARKS
+        touched = false
         gameModel.startLevel(gamePlay.level)
         gamePlay.bestScore = highScores.getBest()
     }
@@ -98,12 +99,12 @@ Page {
             }
         }
     }
-    Tutorial{
+    /*Tutorial{
         id:tutorial
         handX: statusBar.x + 100
         handY: statusBar.y + 100
         visible: false
-    }
+    }*/
 
     GameModel{
         id:gameModel
@@ -158,16 +159,12 @@ Page {
                     maximumLength: 5
                     width: UI.INPUT_SIZE
                     text: "name"
-                    Keys.onEnterPressed: gameOverDialog.accept();
+                    onAccepted: gameOverDialog.accept()
                 }
             }
             Item {
                 width: 20
                 height: 40
-            }
-            Item {
-                id: enterKey
-                Keys.onEnterPressed: gameOverDialog.accept();
             }
 
         }

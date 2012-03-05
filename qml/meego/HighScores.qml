@@ -41,9 +41,9 @@ Page{
     }
     Text{
         id:titleHS
-        text: "High Scores  "
+        text: "Scores"
         anchors{horizontalCenter: parent.horizontalCenter; top:parent.top; topMargin: 40}
-        font.pixelSize: UI.FONT_SIZE*1.5
+        font{pixelSize: UI.FONT_SIZE*1.5; family: someFont.name}
     }
     Text {
         text: "Scores is empty"

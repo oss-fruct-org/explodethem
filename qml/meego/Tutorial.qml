@@ -13,12 +13,12 @@ Item{
         infoAn.start()
     }
 
-    Image{
+    /*Image{
         id: handIcon
         source: "images/hand.jpg"
         opacity: 0.8
         width: 30; height: 30
-    }
+    }*/
 
     Rectangle{
         id:info

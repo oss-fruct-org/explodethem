@@ -96,8 +96,7 @@ Rectangle {
         Transition {
             ScriptAction {script: {bang.opacity = 0.0}}
             PropertyAnimation{properties: "height, width"; duration: 300; easing.type: Easing.InQuad}
-        },Transition {
-            to: "none"
+        },Transition { to: "none"
             SequentialAnimation {
                 //ScriptAction { script: bangSound.play(); }
                 ScriptAction { script: cellMain.exploded(); }
@@ -117,6 +116,9 @@ Rectangle {
                     }
                 }
             }
+        },Transition { from:"";to: "none"
+
         }
+
     ]
 }

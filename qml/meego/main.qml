@@ -15,6 +15,10 @@ PageStackWindow {
         id:highScores
     }
 
+    GameHelp{
+        id:gameHelp
+    }
+
     ToolBarLayout {
         id: commonTools
         visible: true
@@ -30,18 +34,20 @@ PageStackWindow {
         visualParent: pageStack
         MenuLayout {
             MenuItem { text: qsTr("About"); onClicked:{aboutDialog.open()}}
-            MenuItem { text: qsTr("Help"); onClicked:{}}
+            MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores)}}
             MenuItem { text: qsTr("Restart"); onClicked: gamePlay.init()}
+            MenuItem { text: qsTr("Quit"); onClicked: Qt.quit()}
         }
     }
     QueryDialog {
         id: aboutDialog
         icon: "images/about.png"
         titleText: qsTr("Explode Them 1.0")
-        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.\n The main developer is Artemov Nikita")
+        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.")
         onPrivateClicked: {
             aboutDialog.close()
         }
     }
+    FontLoader{id: someFont; source: "Colleged.ttf"}
 }
