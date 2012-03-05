@@ -44,10 +44,12 @@ PageStackWindow {
         id: aboutDialog
         icon: "images/about.png"
         titleText: qsTr("Explode Them 1.0")
-        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.")
+        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University. \noss.fruct.org/projects/explode_them")
         onPrivateClicked: {
             aboutDialog.close()
         }
     }
     FontLoader{id: someFont; source: "Colleged.ttf"}
+    FontLoader{id: helpFont; source: "OneDirection.ttf"}
+    FontLoader{id: statusFont; source: "coolvetica rg.ttf"}
 }

@@ -143,8 +143,14 @@ Page {
             Image{
                 source: "images/bomb5.png"
             }
+
             Text{
-                text:qsTr("Your score: ")+gamePlay.score+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Game Over")
+                color: "white"
+                font.pixelSize:UI.FONT_SIZE*1.6
+            }
+            Text{
+                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
@@ -159,7 +165,10 @@ Page {
                     maximumLength: 5
                     width: UI.INPUT_SIZE
                     text: "name"
-                    onAccepted: gameOverDialog.accept()
+                    onAccepted: {
+                        gameOverDialog.accept()
+                        platformCloseSoftwareInputPanel()
+                    }
                 }
             }
             Item {
@@ -188,7 +197,6 @@ Page {
                 gamePlay.init()
             }
         }
-        Keys.onEnterPressed: gameOverDialog.accept();
     }
 
 

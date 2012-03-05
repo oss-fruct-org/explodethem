@@ -32,7 +32,7 @@ Page {
         id:titleHS
         text: "Help"
         anchors{horizontalCenter: parent.horizontalCenter; top:parent.top; topMargin: 40}
-        font{pixelSize: UI.FONT_SIZE;family: someFont.name}
+        font{pixelSize: UI.FONT_SIZE*1.5;family: someFont.name}
     }
     ListModel {
         id: appModel
@@ -49,7 +49,7 @@ Page {
             radius: 30
             Text {
                 anchors {top: parent.top; topMargin: 30; horizontalCenter: parent.horizontalCenter}
-                font.pixelSize: UI.HELP_FONT_SIZE
+                font{pixelSize: UI.HELP_FONT_SIZE;family: helpFont.name; weight: Font.Light}
                 horizontalAlignment: Text.AlignJustify
                 width: parent.width-20
                 wrapMode: Text.WordWrap
@@ -77,7 +77,7 @@ Page {
     Rectangle{
         id:centRect
         width: parent.width; height: parent.width
-        anchors.bottom: parent.bottom
+        anchors{bottom: parent.bottom; bottomMargin: 50}
         opacity: 0
     }
     PathView {

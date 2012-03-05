@@ -15,7 +15,7 @@ Image {
         id:scoreText
         anchors{left: parent.left}
         text: qsTr(" Score: ") + score
-        font.pixelSize: UI.FONT_SIZE
+        font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText
         styleColor: "black"
         color:"white"
@@ -24,7 +24,7 @@ Image {
         id:levelText
         anchors{left: parent.left;leftMargin: 320}
         text: qsTr("Level: ") + level
-        font.pixelSize: UI.FONT_SIZE
+        font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText
         styleColor: "black"
         color:"white"
