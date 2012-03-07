@@ -41,12 +41,12 @@ Page{
     }
     Text{
         id:titleHS
-        text: "HighScore"
+        text: qsTr("HighScores")
         anchors{horizontalCenter: parent.horizontalCenter; top:parent.top; topMargin: 40}
         font{pixelSize: UI.FONT_SIZE*1.5; family: someFont.name}
     }
     Text {
-        text: "Scores is empty"
+        text: qsTr("Scores is empty")
         color:"white"
         font.pixelSize:UI.FONT_SIZE
         anchors{top:titleHS.bottom; topMargin: 200; horizontalCenter: parent.horizontalCenter}

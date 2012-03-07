@@ -4,7 +4,7 @@ var COUNT = 10
 function loadScores(){
     if (db)
         return;
-    db = openDatabaseSync("Bombs", "1.0", "Bombs", 1000000);
+    db = openDatabaseSync("ExplodeThem", "1.0", "ExplodeThem", 1000000);
 
     if (!db)
         return;

@@ -30,38 +30,39 @@ Page {
     }
     Text{
         id:titleHS
-        text: "Help"
+        text: qsTr("Help")
         anchors{horizontalCenter: parent.horizontalCenter; top:parent.top; topMargin: 40}
         font{pixelSize: UI.FONT_SIZE*1.5;family: someFont.name}
     }
     ListModel {
         id: appModel
-        ListElement { name: "When you push on the bomb you spent spark. If sparks left off game over."; icon: "images/bomb.png" }
-        ListElement { name: "If bomb is red next push do explosion. Need to explode the bomb as much as possible using as little as possible sparks "; icon: "images/bomb-bandage.png" }
-        ListElement { name: "You get one spark after every sixth bombs exploded and at the end of level"; icon: "images/red-bomb.png" }
+        ListElement { name: "When you push the bomb you will spend a spark. If no sparks are avaible then game is over."; icon: "images/bomb.png" }
+        ListElement { name: "If the bomb acuires a red color then next push will cause explosion. You can't push the bomb until reaction doesn't stop "; icon: "images/bomb-bandage.png" }
+        ListElement { name: "You get one spark after every sixth bomb explosion and at the end of level"; icon: "images/red-bomb.png" }
+        ListElement { name: "The main goal is to explode as many bombs as possible using the least amount of sparks"; icon: "images/red-bomb.png" }
     }
 
     Component {
         id: appDelegate
         Rectangle {
-            width: 360; height: 400
+            width: 360; height: 360
             scale: PathView.iconScale
             radius: 30
             Text {
-                anchors {top: parent.top; topMargin: 30; horizontalCenter: parent.horizontalCenter}
+                anchors {top: parent.top; topMargin: 60; horizontalCenter: parent.horizontalCenter}
                 font{pixelSize: UI.HELP_FONT_SIZE;family: helpFont.name; weight: Font.Light}
                 horizontalAlignment: Text.AlignJustify
-                width: parent.width-20
+                width: parent.width-45
                 wrapMode: Text.WordWrap
                 text: name
                 smooth: true
             }
-            Image {
+            /*Image {
                 id: myIcon
                 anchors.bottom: parent.bottom
                 source: icon
                 smooth: true
-            }
+            }*/
 
             MouseArea {
                 anchors.fill: parent
@@ -93,15 +94,17 @@ Page {
         model: appModel
         delegate: appDelegate
         path: Path {
-            startX: -240
+            startX: -440
             startY: 100
             PathAttribute { name: "iconScale"; value: 0.5 }
             //PathQuad { x: gamePlay.width/2; y: 150; controlX: 50; controlY: 200 }
             PathLine {x: gamePlay.width/2; y: 200}
             PathAttribute { name: "iconScale"; value: 1.0 }
             //PathQuad { x: gamePlay.width+300; y: 50; controlX: 350; controlY: 200 }
-            PathLine { x: gamePlay.width+240; y: 100;}
-            PathAttribute { name: "iconScale"; value: 0.5 }
+            PathLine { x: gamePlay.width+440; y: 100;}
+            PathAttribute { name: "iconScale"; value: 0.5 }/*
+            PathLine { x: gamePlay.width+240+gamePlay.width/2; y: 200;}
+            PathAttribute { name: "iconScale"; value: 1 }*/
         }
     }
 }

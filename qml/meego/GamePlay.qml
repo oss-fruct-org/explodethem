@@ -173,7 +173,7 @@ Page {
             }
             Item {
                 width: 20
-                height: 40
+                height: 25
             }
 
         }

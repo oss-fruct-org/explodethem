@@ -51,5 +51,5 @@ PageStackWindow {
     }
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
-    FontLoader{id: statusFont; source: "coolvetica rg.ttf"}
+    FontLoader{id: statusFont; source: "coolvetica.ttf"}
 }
