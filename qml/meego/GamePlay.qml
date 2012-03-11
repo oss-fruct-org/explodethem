@@ -163,7 +163,7 @@ Page {
                 }
                 TextField{
                     id:inputName
-                    maximumLength: 5
+                    maximumLength: 7
                     width: UI.INPUT_SIZE
                     text: "name"
                     onAccepted: {

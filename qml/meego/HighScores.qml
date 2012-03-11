@@ -26,18 +26,15 @@ Page{
     }
 
     orientationLock: PageOrientation.LockPortrait
+
     tools: ToolBarLayout {
-        visible: false
+
         ToolIcon {
             platformIconId: "toolbar-back"
             anchors.left: (parent === undefined) ? undefined : parent.left
+            visible: highScores.current === -2
             onClicked: pageStack.pop()
         }
-        /*ToolIcon {
-            platformIconId: "toolbar-refresh"
-            anchors.left: (parent === undefined) ? undefined : parent.left
-            onClicked: list.incrementCurrentIndex()
-        }*/
         ToolIcon {
             platformIconId: "toolbar-delete"
             anchors.right: (parent === undefined) ? undefined : parent.right
@@ -69,11 +66,12 @@ Page{
     }
     Component {
         id: highlight
-        Rectangle {
-            width: highScores.width; height: 40
-            color: "lightsteelblue"; radius: 5
-            opacity: highScores.current !== -1 ? 0.7 : 0
+        Image {
+            sourceSize.width: 60
+            source: "images/arrow.png"
+            opacity: highScores.current !== -2 ? 0.8 : 0
             y: highScores.current !== -1 ? list.currentItem.y+5 : highScores.height
+            x:30
             Behavior on y {
                 SpringAnimation {
                     spring: 3
@@ -119,6 +117,7 @@ Page{
         highlight: highlight
         //highlightFollowsCurrentItem: false
     }
+
     Button{
         text: qsTr("Play again")
         visible: highScores.current !== -2
@@ -158,6 +157,10 @@ Page{
             } else {
                list.currentIndex = -1
             }
+        }
+
+        if(highScores.status === PageStatus.Inactivating){
+            highlight.y = parent.height
         }
     }
 }
