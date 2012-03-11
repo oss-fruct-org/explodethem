@@ -1,6 +1,6 @@
-import QtQuick 1.1
+import QtQuick 1.0
 import "UIConstants.js" as UI
-import com.nokia.meego 1.0
+import com.nokia.symbian 1.1
 import Qt 4.7
 import QtMultimediaKit 1.1
 
@@ -27,10 +27,10 @@ Page {
     tools: commonTools
     orientationLock: PageOrientation.LockPortrait
 
-    SoundEffect  {
+    /*SoundEffect  {
         id: bombSound
         source: "audio/bomb4.wav"
-    }
+    }*/
     SoundEffect  {
         id: noneSound
         source: "audio/none.wav"
@@ -42,6 +42,7 @@ Page {
     }
     GameStatusBar{
         id:statusBar
+
     }
 
     Item{
@@ -75,7 +76,6 @@ Page {
                     }
                     onExploded: {
                         if(touched){
-
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -109,29 +109,31 @@ Page {
     GameModel{
         id:gameModel
         onNextlevel: {
-            bombSound.stop()
+            //bombSound.stop()
             gamePlay.sparks++
             nextLevelDialog.open()
+            console.log("next")
         }
         onBang: {
-            if(!bombSound.playing)
-                bombSound.play()
+            /*if(!bombSound.playing)
+                bombSound.play()*/
         }
 
         onStopped: {
-            bombSound.stop()
             touched = false
             if(gamePlay.sparks == 0)
                 gameOverDialog.open()
+            //bombSound.stop()
         }
     }
 
     QueryDialog {
         id: nextLevelDialog
         icon: "images/bomb4.png"
+        acceptButtonText: qsTr("Ok")
         titleText: qsTr("Next Level")
-        message: qsTr("+1 sparks")
-        onPrivateClicked: {
+        message: "+1 sparks"
+        onAccepted: {
             gameModel.startLevel(++gamePlay.level)
         }
     }
@@ -155,7 +157,6 @@ Page {
                 font.pixelSize:UI.FONT_SIZE
             }
             Row{
-                id: inputRow
                 Text{
                     text:qsTr("Your name: ")
                     color: "white"
@@ -166,10 +167,10 @@ Page {
                     maximumLength: 5
                     width: UI.INPUT_SIZE
                     text: "name"
-                    onAccepted: {
+                    /*onAccepted: {
                         gameOverDialog.accept()
                         platformCloseSoftwareInputPanel()
-                    }
+                    }*/
                 }
             }
             Item {
@@ -189,23 +190,13 @@ Page {
 
         onStatusChanged: {
             if(gameOverDialog.status === DialogStatus.Opening){
-                if(highScores.getScore(10) < gamePlay.score){
-                    inputRow.visible = true
-                    inputName.focus = true
-                    inputName.selectAll()
-                }
-                else
-                    inputRow.visible = false
+                inputName.focus = true
+                inputName.selectAll()
             }
             if(gameOverDialog.status === DialogStatus.Closing){
-                var name
                 inputName.focus = false
-                if(gamePlay.score ===0)
-                     name = "looser"
-                else
-                    name = inputName.text
-                highScores.current = highScores.setScore(name, gamePlay.score)
-                pageStack.push(highScores)
+                highScores.setScore(inputName.text, gamePlay.score)
+                gamePlay.init()
             }
         }
     }

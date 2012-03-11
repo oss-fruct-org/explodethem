@@ -1,45 +1,31 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-import QtQuick 1.1
-import com.nokia.meego 1.0
+import QtQuick 1.0
+import com.nokia.symbian 1.1
 import "scores.js" as DB
 import "UIConstants.js" as UI
 
 Page{
     id:highScores
-
-    property int current: -1
-
     function setScore(name,score) {
-        return DB.setScore(name,score)
+        DB.setScore(name,score)
     }
     function getBest(){
+        var best
         if(highScoresModel.count > 0)
             return highScoresModel.get(0).score
         else
             return 0
     }
-    function getScore(id){
-        if(highScoresModel.count < id)
-            return 0
-        else
-            return highScoresModel.get(id-1).score
-    }
 
     orientationLock: PageOrientation.LockPortrait
     tools: ToolBarLayout {
-        visible: false
-        ToolIcon {
-            platformIconId: "toolbar-back"
+        visible: true
+        ToolButton {
+            iconSource: "toolbar-back"
             anchors.left: (parent === undefined) ? undefined : parent.left
             onClicked: pageStack.pop()
         }
-        /*ToolIcon {
-            platformIconId: "toolbar-refresh"
-            anchors.left: (parent === undefined) ? undefined : parent.left
-            onClicked: list.incrementCurrentIndex()
-        }*/
-        ToolIcon {
-            platformIconId: "toolbar-delete"
+        ToolButton {
+            iconSource: "toolbar-delete"
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: {
                 clearScoresDialog.open()
@@ -67,33 +53,16 @@ Page{
         styleColor: "black"
         visible: !(highScoresModel.count > 0)
     }
-    Component {
-        id: highlight
-        Rectangle {
-            width: highScores.width; height: 40
-            color: "lightsteelblue"; radius: 5
-            opacity: highScores.current !== -1 ? 0.7 : 0
-            y: highScores.current !== -1 ? list.currentItem.y+5 : highScores.height
-            Behavior on y {
-                SpringAnimation {
-                    spring: 3
-                    damping: 0.2
-                }
-            }
-        }
-    }
     ListView {
-        id:list
         height:10*UI.SCORES_LIST_ITEM_HEIGHT
         anchors{top: parent.top; topMargin: (parent.height-height)/2}
         model: highScoresModel
         delegate: Item {
-                id:wrapper
                 width: highScores.width; height: UI.SCORES_LIST_ITEM_HEIGHT
                 Text {
                     id: scoreId
                     text: (index+1)+"."
-                    color:id === highScores.current ? "red" : "white"
+                    color:"white"
                     font.pixelSize:UI.FONT_SIZE
                     anchors{right:parent.horizontalCenter; rightMargin: 130}
                     style: Text.RichText
@@ -116,19 +85,7 @@ Page{
                     styleColor: "black"
                 }
         }
-        highlight: highlight
-        //highlightFollowsCurrentItem: false
     }
-    Button{
-        text: qsTr("Play again")
-        visible: highScores.current !== -2
-        anchors{top: list.bottom; topMargin: 20; horizontalCenter: parent.horizontalCenter}
-        onClicked: {
-            pageStack.pop()
-            gamePlay.init()
-        }
-    }
-
     QueryDialog {
         id: clearScoresDialog
         icon: "images/what.png"
@@ -146,18 +103,5 @@ Page{
     Component.onCompleted: {
         DB.loadScores()
         DB.updateScoreList()
-    }
-    onStatusChanged: {
-        if(highScores.status === PageStatus.Activating){
-            if(highScores.current !== -1){
-                for(var i=0;i<highScoresModel.count;i++){
-                    if(highScoresModel.get(i).id.toString() === highScores.current.toString()){
-                        list.currentIndex = i
-                    }
-                }
-            } else {
-               list.currentIndex = -1
-            }
-        }
     }
 }
