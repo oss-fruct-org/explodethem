@@ -13,9 +13,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         qDebug("bla");
         app->installTranslator(&qtTranslator);
     }
-    qtTranslator.load("explodethem_ru");
-            qDebug("bla");
-            app->installTranslator(&qtTranslator);
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
     viewer.setMainQmlFile(QLatin1String("qml/meego/main.qml"));

@@ -43,6 +43,11 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/copyright \
     qtc_packaging/debian_harmattan/control \
     qtc_packaging/debian_harmattan/compat \
-    qtc_packaging/debian_harmattan/changelog
+    qtc_packaging/debian_harmattan/changelog \
+    qtc_packaging/debian_harmattan/explodethem.conf
 
-TRANSLATIONS = qml/meego/translations/bombs-qml_ru.ts
+TRANSLATIONS = qml/meego/translations/explodethem_ru.ts
+
+gameclassify.files += qtc_packaging/debian_harmattan/explodethem.conf
+gameclassify.path = /usr/share/policy/etc/syspart.conf.d
+INSTALLS += gameclassify
