@@ -136,6 +136,7 @@ Page{
         anchors{top: list.bottom; topMargin: 20; horizontalCenter: parent.horizontalCenter}
         onClicked: {
             pageStack.pop()
+            gamePlay.input.platformCloseSoftwareInputPanel()
             gamePlay.init()
         }
     }

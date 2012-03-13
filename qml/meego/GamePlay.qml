@@ -14,6 +14,8 @@ Page {
     property int bestScore: 0
     property int sparks
     property bool touched: false
+    property alias input: inputName
+
     function init(){
         level = 1
         score = 0
@@ -198,6 +200,7 @@ Page {
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
+                    console.log("open")
                 }
                 else
                     inputRow.visible = false
