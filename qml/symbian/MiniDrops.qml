@@ -1,11 +1,12 @@
-import QtQuick 1.0
+// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
+import QtQuick 1.1
 import "UIConstants.js" as UI
 
 Item {
     id:miniItems
     property string source:"images/mini-fire.png"
-    property int w: 30
-    property int h: 30
+    property int w: 15
+    property int h: 15
     property int velocity: UI.VELOCITY
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
 

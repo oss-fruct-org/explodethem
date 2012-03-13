@@ -19,6 +19,7 @@ function setScore(name, score){
         return;
     }
     var rs
+    var ret
     db.transaction(function(tx) {
         rs = tx.executeSql('SELECT * FROM highScores WHERE score = (SELECT MIN(score) FROM highScores) LIMIT 1');
     });
@@ -27,8 +28,12 @@ function setScore(name, score){
         db.transaction(function(tx) {
             tx.executeSql('UPDATE highScores SET score=?,name=? WHERE id=?', [score, name, rs.rows.item(0).id]);
         });
+        ret = rs.rows.item(0).id
+    } else {
+        ret = -1
     }
     updateScoreList()
+    return ret
 }
 
 function reset(){
@@ -56,7 +61,7 @@ function updateScoreList(){
     for(var i = 0; i<rs.rows.length;i++) {
         var rec = rs.rows.item(i);
         if(!(rec.score < 0)){
-            highScoresModel.set(i, {"name": rec.name, "score":rec.score})
+            highScoresModel.set(i, {"name": rec.name, "score":rec.score, "id": rec.id})
         }
     }
 }

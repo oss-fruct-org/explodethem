@@ -1,4 +1,4 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import "UIConstants.js" as UI
 import Qt 4.7
 import QtMultimediaKit 1.1
@@ -12,16 +12,21 @@ Rectangle {
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
     color: "#ffffff"
 
+    /*SoundEffect  {
+        id: bangSound
+        source: "audio/bomb"+index+".wav"
+        volume: 0.5
+    }*/
     Image {
         id: bombIcon
-        source: /*if(t === 1){
+        source: if(t === 1){
                     return "images/bomb.png"
                 } else if( t === 2) {
                     return "images/bomb-bandage.png"
                 } else if(t === 3){
-                    return*/ "images/red-bomb.png"/*
+                    return "images/red-bomb.png"
                 } else
-                    return ""*/
+                    return ""
         anchors.centerIn: parent
         height: /*if(t === 1){
                     return 7*parent.width/12
@@ -39,28 +44,15 @@ Rectangle {
     /*AnimatedImage {
         id : bombs
         source: "images/bombs.gif"
-        width: parent.width
-        height: width
         paused: true
         //visible: false
     }*/
-    /*Text{
-        text:if(t === 1){
-                 return "1"
-             } else if( t === 2) {
-                 return "2"
-             } else if(t === 3){
-                 return "3"
-             } else
-                 return "0"
-    }*/
-
-    /*AnimatedImage {
+    AnimatedImage {
         id : bang;
         source: "images/bang.gif"
         opacity: 0
         paused: true
-    }*/
+    }
 
     MouseArea{
         anchors.fill: parent
@@ -73,42 +65,42 @@ Rectangle {
                 name: "big"
                 when: (t === 3)
                 PropertyChanges {target: bombIcon; height: cellMain.height}
-                //PropertyChanges {target: bang; currentFrame: 0}
-                //PropertyChanges {target: bang; paused: true}
-                //PropertyChanges {target: bombs; currentFrame: 9}
+                PropertyChanges {target: bang; currentFrame: 0}
+                PropertyChanges {target: bang; paused: true}
+               // PropertyChanges {target: bombs; currentFrame: 9}
             },State {
                 name: "medium"
                 when: (t === 2)
                 PropertyChanges {target: bombIcon; height: 4*cellMain.height/5}
-                //PropertyChanges {target: bang; currentFrame: 0}
-                //PropertyChanges {target: bang; paused: true}
+                PropertyChanges {target: bang; currentFrame: 0}
+                PropertyChanges {target: bang; paused: true}
                 //PropertyChanges {target: bombs; currentFrame: 5}
             },State {
                 name: "small"
                 when: (t === 1)
                 PropertyChanges {target: bombIcon; height: 7*cellMain.height/12}
-                //PropertyChanges {target: bang; paused: true}
-                //PropertyChanges {target: bang; currentFrame: 0}
+                PropertyChanges {target: bang; paused: true}
+                PropertyChanges {target: bang; currentFrame: 0}
                 //PropertyChanges {target: bombs; currentFrame: 1}
             }, State {
                 name: "none"
                 when: (t === 0)
                 PropertyChanges {target: bombIcon; height: 0}
-                //PropertyChanges {target: bang; currentFrame: 7}
-               // PropertyChanges {target: bombs; currentFrame: 0}
+                PropertyChanges {target: bang; currentFrame: 7}
+                //PropertyChanges {target: bombs; currentFrame: 0}
 
             }
 
     ]
     transitions: [
         Transition {
-            //ScriptAction {script: {bang.opacity = 0.0}}
-            //PropertyAnimation{properties: "height, width"; duration: 300; easing.type: Easing.InQuad}
-            //PropertyAnimation{properties: "currentFrame"; duration: 300; easing.type: Easing.InQuad}
+            ScriptAction {script: {bang.opacity = 0.0}}
+            PropertyAnimation{properties: "height, width"; duration: 300; easing.type: Easing.InQuad}
         },Transition { to: "none"
             SequentialAnimation {
+                //ScriptAction { script: bangSound.play(); }
                 ScriptAction { script: cellMain.exploded(); }
-                /*ScriptAction {
+                ScriptAction {
                     script: {
                         bang.opacity = 1.0
                     }
@@ -122,7 +114,7 @@ Rectangle {
                     script: {
                         bang.opacity = 0.0
                     }
-                }*/
+                }
             }
         },Transition { from:"";to: "none"
 

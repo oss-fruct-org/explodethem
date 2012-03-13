@@ -1,21 +1,22 @@
 #include <QtGui/QApplication>
 #include <QTranslator>
+//#include <qdeclarative.h>
 #include "qmlapplicationviewer.h"
-#include <QDebug>
+//#include <QDebug>
+//#include "model.h"
 
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QApplication::setGraphicsSystem("raster");
+    //QApplication::setGraphicsSystem("opengl");
     QScopedPointer<QApplication> app(createApplication(argc, argv));
-    QTranslator qtTranslator;
+    /*QTranslator qtTranslator;
     if(qtTranslator.load("explodethem_ru")){
         qDebug("bla");
         app->installTranslator(&qtTranslator);
-    }
-    qtTranslator.load("explodethem_ru");
-            qDebug("bla");
-            app->installTranslator(&qtTranslator);
+    }*/
+
+    //qmlRegisterType<MyModel>("models", 1, 0, "MyModel");
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
     viewer.setMainQmlFile(QLatin1String("qml/meego/main.qml"));

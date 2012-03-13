@@ -1,4 +1,4 @@
-import QtQuick 1.0
+import QtQuick 1.1
 import "UIConstants.js" as UI
 import com.nokia.symbian 1.1
 import Qt 4.7
@@ -29,6 +29,7 @@ Page {
 
     /*SoundEffect  {
         id: bombSound
+        volume: 0.2
         source: "audio/bomb4.wav"
     }*/
     SoundEffect  {
@@ -42,7 +43,6 @@ Page {
     }
     GameStatusBar{
         id:statusBar
-
     }
 
     Item{
@@ -76,6 +76,7 @@ Page {
                     }
                     onExploded: {
                         if(touched){
+
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -112,7 +113,6 @@ Page {
             //bombSound.stop()
             gamePlay.sparks++
             nextLevelDialog.open()
-            console.log("next")
         }
         onBang: {
             /*if(!bombSound.playing)
@@ -120,19 +120,19 @@ Page {
         }
 
         onStopped: {
+            //bombSound.stop()
             touched = false
             if(gamePlay.sparks == 0)
                 gameOverDialog.open()
-            //bombSound.stop()
         }
     }
 
     QueryDialog {
         id: nextLevelDialog
         icon: "images/bomb4.png"
-        acceptButtonText: qsTr("Ok")
         titleText: qsTr("Next Level")
-        message: "+1 sparks"
+        acceptButtonText: qsTr("ok")
+        message: qsTr("+1 sparks")
         onAccepted: {
             gameModel.startLevel(++gamePlay.level)
         }
@@ -152,11 +152,12 @@ Page {
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
-                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Your score: ")+gamePlay.score+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
             Row{
+                id: inputRow
                 Text{
                     text:qsTr("Your name: ")
                     color: "white"
@@ -164,7 +165,7 @@ Page {
                 }
                 TextField{
                     id:inputName
-                    maximumLength: 5
+                    maximumLength: 7
                     width: UI.INPUT_SIZE
                     text: "name"
                     /*onAccepted: {
@@ -190,13 +191,23 @@ Page {
 
         onStatusChanged: {
             if(gameOverDialog.status === DialogStatus.Opening){
-                inputName.focus = true
-                inputName.selectAll()
+                if(highScores.getScore(10) < gamePlay.score){
+                    inputRow.visible = true
+                    inputName.focus = true
+                    inputName.selectAll()
+                }
+                else
+                    inputRow.visible = false
             }
             if(gameOverDialog.status === DialogStatus.Closing){
+                var name
                 inputName.focus = false
-                highScores.setScore(inputName.text, gamePlay.score)
-                gamePlay.init()
+                if(gamePlay.score ===0)
+                     name = "pacifist"
+                else
+                    name = inputName.text
+                highScores.current = highScores.setScore(name, gamePlay.score)
+                pageStack.push(highScores)
             }
         }
     }

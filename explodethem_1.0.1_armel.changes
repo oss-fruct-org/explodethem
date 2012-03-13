@@ -1,0 +1,23 @@
+Format: 1.8
+Date: Mon, 12 Mar 2012 10:25:56 +0400
+Source: explodethem
+Binary: explodethem
+Architecture: armel
+Version: 1.0.1
+Distribution: unstable
+Urgency: low
+Maintainer: Artemov Nikita <artemov@cs.karelia.ru>
+Changed-By: unknown <>
+Description: 
+ explodethem - Game arcade
+Changes: 
+ explodethem (1.0.1) unstable; urgency=low
+ .
+   * <Add change description here>
+Checksums-Sha1: 
+ 866de7233a7d75af187963ee75cd2547cfc3ee12 1291126 explodethem_1.0.1_armel.deb
+Checksums-Sha256: 
+ 3f5ded9318283d6fd39a0f3eae5681ae3915655eb72cce743a456c0d33f8aad3 1291126 explodethem_1.0.1_armel.deb
+Files: 
+ ec17e881d68e2f0a4d9b2e5f4b3b3b04 1291126 user/games optional explodethem_1.0.1_armel.deb
+Maemo-Display-Name: Explode Them

@@ -5,8 +5,8 @@ import "UIConstants.js" as UI
 Item {
     id:miniItems
     property string source:"images/mini-fire.png"
-    property int w: 30
-    property int h: 30
+    property int w: 20
+    property int h: 20
     property int velocity: UI.VELOCITY
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
 
@@ -20,7 +20,7 @@ Item {
         y: parent.height/2 - height/2
 
         Behavior on x {
-            NumberAnimation {id:rd; duration: UI.VELOCITY*(UI.COL_COUNT+1) }
+            NumberAnimation {id:rd; duration: UI.VELOCITY*(UI.COL_COUNT+1); easing.type:Easing.Linear}
         }
     }
 
@@ -34,7 +34,7 @@ Item {
         y: parent.height/2 - height/2
 
         Behavior on x {
-            NumberAnimation { duration: UI.VELOCITY*(UI.COL_COUNT+1)}
+            NumberAnimation { duration: UI.VELOCITY*(UI.COL_COUNT+1);easing.type:Easing.Linear}
         }
     }
 
@@ -48,7 +48,7 @@ Item {
                        //parent.height/2 - parent.height*(index-upD)/UI.COL_COUNT - height/2
 
         Behavior on y {
-            NumberAnimation {duration: UI.VELOCITY*(UI.ROW_COUNT+1) }
+            NumberAnimation {duration: UI.VELOCITY*(UI.ROW_COUNT+1);easing.type:Easing.Linear;}
         }
     }
 
@@ -62,7 +62,7 @@ Item {
                        //parent.height/2 + parent.height*(downD-index)/UI.COL_COUNT - height/2
 
         Behavior on y {
-            NumberAnimation { duration: UI.VELOCITY*(UI.ROW_COUNT+1) }
+            NumberAnimation { duration: UI.VELOCITY*(UI.ROW_COUNT+1);easing.type:Easing.Linear }
         }
     }
 }

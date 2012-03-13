@@ -66,12 +66,24 @@ Page{
     }
     Component {
         id: highlight
-        Image {
+        /*Image {
             sourceSize.width: 60
             source: "images/arrow.png"
             opacity: highScores.current !== -2 ? 0.8 : 0
             y: highScores.current !== -1 ? list.currentItem.y+5 : highScores.height
             x:30
+            Behavior on y {
+                SpringAnimation {
+                    spring: 3
+                    damping: 0.2
+                }
+            }
+        }*/
+        Rectangle {
+            width: highScores.width;
+            color: "lightsteelblue"; radius: 5
+            opacity: 0.7
+            y: highScores.current < 0? highScores.y : list.currentItem.y
             Behavior on y {
                 SpringAnimation {
                     spring: 3

@@ -3,6 +3,7 @@ import "UIConstants.js" as UI
 import com.nokia.meego 1.0
 import Qt 4.7
 import QtMultimediaKit 1.1
+//import models 1.0
 
 Page {
     id:gamePlay
@@ -19,7 +20,8 @@ Page {
         sparks = UI.START_COUNT_SPARKS
         touched = false
         gameModel.startLevel(gamePlay.level)
-        gamePlay.bestScore = highScores.getBest()
+        //gamePlay.bestScore = highScores.getBest()
+        //myModel.startLevel(1);
     }
 
     width: parent.width
@@ -43,6 +45,9 @@ Page {
     GameStatusBar{
         id:statusBar
     }
+    /*MyModel{
+        id:myModel
+    }*/
 
     Item{
         id: gameArea
@@ -66,7 +71,7 @@ Page {
                                 }
                                 touched = true
                                 gameModel.touch(index)
-                                //gameModel.test()
+                                //myModel.touch(index)
                             }
                         } else {
                             if(!noneSound.playing)
@@ -95,7 +100,7 @@ Page {
             Repeater {
                 id: miniDrops
                 model:gameModel.model
-                delegate: Debris{}
+                delegate: MiniDrops{}
             }
         }
     }
@@ -167,8 +172,8 @@ Page {
                     width: UI.INPUT_SIZE
                     text: "name"
                     onAccepted: {
-                        gameOverDialog.accept()
                         platformCloseSoftwareInputPanel()
+                        gameOverDialog.accept()
                     }
                 }
             }
@@ -201,7 +206,7 @@ Page {
                 var name
                 inputName.focus = false
                 if(gamePlay.score ===0)
-                     name = "looser"
+                     name = "pacifist"
                 else
                     name = inputName.text
                 highScores.current = highScores.setScore(name, gamePlay.score)

@@ -1,11 +1,11 @@
-import QtQuick 1.0
+// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
+import QtQuick 1.1
 import "UIConstants.js" as UI
 import com.nokia.symbian 1.1
 
 Image {
     id: statusBar
-    clip:true
-    height: 76
+
     property alias sparksDigit: sparksDigit
 
     width: gamePlay.width
@@ -22,7 +22,7 @@ Image {
     }
     Text{
         id:levelText
-        anchors{left: parent.left;leftMargin: 250}
+        anchors{left: parent.left;leftMargin: 240}
         text: qsTr("Level: ") + level
         font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText

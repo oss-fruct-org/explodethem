@@ -1,4 +1,5 @@
-import QtQuick 1.0
+// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
+import QtQuick 1.1
 import "UIConstants.js" as UI
 import com.nokia.symbian 1.1
 
@@ -44,7 +45,7 @@ Page {
     Component {
         id: appDelegate
         Rectangle {
-            width: 280; height: 280
+            width: 360; height: 360
             scale: PathView.iconScale
             radius: 30
             Text {
