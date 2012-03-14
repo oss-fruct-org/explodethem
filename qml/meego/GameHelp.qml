@@ -31,7 +31,7 @@ Page {
         id: appModel
         ListElement { name: "When you push the bomb you will spend a spark. If no sparks are avaible then game is over."; icon: "images/bomb.png" }
         ListElement { name: "If the bomb acuires a red color then next push will cause explosion. You can't push the bomb until reaction doesn't stop "; icon: "images/bomb-bandage.png" }
-        ListElement { name: "You get one spark after every sixth bomb explosion and at the end of level"; icon: "images/red-bomb.png" }
+        ListElement { name: "You get one spark after every fifth bomb explosion and at the end of level"; icon: "images/red-bomb.png" }
         ListElement { name: "The main goal is to explode as many bombs as possible using the least amount of sparks"; icon: "images/red-bomb.png" }
     }
 
