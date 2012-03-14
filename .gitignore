@@ -16,3 +16,5 @@ explodethem_template.pkg
 moc/
 obj/
 explodethem.pro.user
+*.deb
+*.changes

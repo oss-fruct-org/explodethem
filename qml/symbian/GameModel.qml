@@ -57,6 +57,7 @@ Item{
     ListModel {
          id: listModel
     }
+
     WorkerScript {
         id: worker
         source: "checkin.js"

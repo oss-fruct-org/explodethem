@@ -13,13 +13,6 @@ Page {
             anchors.left: (parent === undefined) ? undefined : parent.left
             onClicked: pageStack.pop()
         }
-        /*ToolIcon {
-            platformIconId: "toolbar-delete"
-            anchors.right: (parent === undefined) ? undefined : parent.right
-            onClicked: {
-                clearScoresDialog.open()
-            }
-        }*/
     }
 
     Image{

@@ -2,7 +2,7 @@
 
 var COL_COUNT = 6;
 var ROW_COUNT = 8;
-var VELOCITY = 400
+var VELOCITY = 380
 var NULL = -30
 var UP_COUNT = 6
 var START_COUNT_SPARKS = 10

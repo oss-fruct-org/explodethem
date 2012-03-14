@@ -12,11 +12,6 @@ Rectangle {
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
     color: "#ffffff"
 
-    /*SoundEffect  {
-        id: bangSound
-        source: "audio/bomb"+index+".wav"
-        volume: 0.5
-    }*/
     Image {
         id: bombIcon
         source: if(t === 1){
@@ -49,7 +44,7 @@ Rectangle {
     }*/
     AnimatedImage {
         id : bang;
-        source: "images/bang.gif"
+        source: "images/bang2.gif"
         opacity: 0
         paused: true
     }
@@ -86,7 +81,7 @@ Rectangle {
                 name: "none"
                 when: (t === 0)
                 PropertyChanges {target: bombIcon; height: 0}
-                PropertyChanges {target: bang; currentFrame: 7}
+                PropertyChanges {target: bang; currentFrame: 5}
                 //PropertyChanges {target: bombs; currentFrame: 0}
 
             }
@@ -97,8 +92,7 @@ Rectangle {
             ScriptAction {script: {bang.opacity = 0.0}}
             PropertyAnimation{properties: "height, width"; duration: 300; easing.type: Easing.InQuad}
         },Transition { to: "none"
-            SequentialAnimation {
-                //ScriptAction { script: bangSound.play(); }
+            /*SequentialAnimation {
                 ScriptAction { script: cellMain.exploded(); }
                 ScriptAction {
                     script: {
@@ -108,14 +102,15 @@ Rectangle {
                 PropertyAnimation {
                     target: bang
                     properties: "currentFrame"
-                    duration: 400
+                    duration: 300
                 }
                 ScriptAction {
                     script: {
                         bang.opacity = 0.0
                     }
                 }
-            }
+                ScriptAction { script: bang.paused = true}
+            }*/
         },Transition { from:"";to: "none"
 
         }

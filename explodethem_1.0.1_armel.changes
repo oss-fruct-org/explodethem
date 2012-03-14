@@ -15,9 +15,9 @@ Changes:
  .
    * <Add change description here>
 Checksums-Sha1: 
- 866de7233a7d75af187963ee75cd2547cfc3ee12 1291126 explodethem_1.0.1_armel.deb
+ 739c17bc9c2c9e4e04ef9d7940eaf5a118d89ca4 1291482 explodethem_1.0.1_armel.deb
 Checksums-Sha256: 
- 3f5ded9318283d6fd39a0f3eae5681ae3915655eb72cce743a456c0d33f8aad3 1291126 explodethem_1.0.1_armel.deb
+ 45e215d69f0015fddf2bde2db1fbb4c9d934781a8e370d6aa7a40ae2d324722c 1291482 explodethem_1.0.1_armel.deb
 Files: 
- ec17e881d68e2f0a4d9b2e5f4b3b3b04 1291126 user/games optional explodethem_1.0.1_armel.deb
+ b5138ea58920806e4b9fd8f12ce304e0 1291482 user/games optional explodethem_1.0.1_armel.deb
 Maemo-Display-Name: Explode Them

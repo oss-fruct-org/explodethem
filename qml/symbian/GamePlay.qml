@@ -3,6 +3,7 @@ import "UIConstants.js" as UI
 import com.nokia.symbian 1.1
 import Qt 4.7
 import QtMultimediaKit 1.1
+//import models 1.0
 
 Page {
     id:gamePlay
@@ -13,13 +14,16 @@ Page {
     property int bestScore: 0
     property int sparks
     property bool touched: false
+    property alias input: inputName
+
     function init(){
         level = 1
         score = 0
         sparks = UI.START_COUNT_SPARKS
         touched = false
         gameModel.startLevel(gamePlay.level)
-        gamePlay.bestScore = highScores.getBest()
+        //gamePlay.bestScore = highScores.getBest()
+        //myModel.startLevel(1);
     }
 
     width: parent.width
@@ -29,7 +33,6 @@ Page {
 
     /*SoundEffect  {
         id: bombSound
-        volume: 0.2
         source: "audio/bomb4.wav"
     }*/
     SoundEffect  {
@@ -44,6 +47,9 @@ Page {
     GameStatusBar{
         id:statusBar
     }
+    /*MyModel{
+        id:myModel
+    }*/
 
     Item{
         id: gameArea
@@ -67,7 +73,7 @@ Page {
                                 }
                                 touched = true
                                 gameModel.touch(index)
-                                //gameModel.test()
+                                //myModel.touch(index)
                             }
                         } else {
                             if(!noneSound.playing)
@@ -96,7 +102,7 @@ Page {
             Repeater {
                 id: miniDrops
                 model:gameModel.model
-                delegate: Debris{}
+                delegate: MiniDrops{}
             }
         }
     }
@@ -131,8 +137,8 @@ Page {
         id: nextLevelDialog
         icon: "images/bomb4.png"
         titleText: qsTr("Next Level")
-        acceptButtonText: qsTr("ok")
         message: qsTr("+1 sparks")
+        acceptButtonText: "Next"
         onAccepted: {
             gameModel.startLevel(++gamePlay.level)
         }
@@ -152,7 +158,7 @@ Page {
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
-                text:qsTr("Your score: ")+gamePlay.score+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
@@ -169,8 +175,8 @@ Page {
                     width: UI.INPUT_SIZE
                     text: "name"
                     /*onAccepted: {
-                        gameOverDialog.accept()
                         platformCloseSoftwareInputPanel()
+                        gameOverDialog.accept()
                     }*/
                 }
             }
@@ -195,6 +201,7 @@ Page {
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
+                    console.log("open")
                 }
                 else
                     inputRow.visible = false

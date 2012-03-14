@@ -173,7 +173,9 @@ Page {
                     maximumLength: 7
                     width: UI.INPUT_SIZE
                     text: "name"
-                    onAccepted: {
+                    /*onAccepted: {
+                    }*/
+                    Keys.onReturnPressed: {
                         platformCloseSoftwareInputPanel()
                         gameOverDialog.accept()
                     }

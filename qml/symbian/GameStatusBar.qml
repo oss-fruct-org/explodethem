@@ -22,7 +22,7 @@ Image {
     }
     Text{
         id:levelText
-        anchors{left: parent.left;leftMargin: 240}
+        anchors{left: parent.left;leftMargin: 320}
         text: qsTr("Level: ") + level
         font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText

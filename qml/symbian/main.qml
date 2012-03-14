@@ -35,7 +35,7 @@ PageStackWindow {
         MenuLayout {
             MenuItem { text: qsTr("About"); onClicked:{aboutDialog.open()}}
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
-            MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
+            //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
             MenuItem { text: qsTr("Restart"); onClicked: gamePlay.init()}
             MenuItem { text: qsTr("Quit"); onClicked: Qt.quit()}
@@ -45,10 +45,13 @@ PageStackWindow {
         id: aboutDialog
         icon: "images/about.png"
         titleText: qsTr("Explode Them 1.0")
+        acceptButtonText: "Other applications"
         message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.")
-        /*onPrivateClicked: {
+
+        onAccepted: {
+            Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")
             aboutDialog.close()
-        }*/
+        }
     }
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
