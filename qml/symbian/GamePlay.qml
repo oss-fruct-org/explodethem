@@ -65,7 +65,7 @@ Page {
                 id: cells
                 model:gameModel.model
                 delegate: Cell{
-                    onClicked: {
+                    onPressed: {
                         if(!gameModel.isInProgress()){
                             if(gamePlay.sparks != 0 && t>0){
                                 sparks--
@@ -74,6 +74,7 @@ Page {
                                 }
                                 touched = true
                                 gameModel.touch(index)
+                                privateStyle.play(Symbian.Button)
                                 //myModel.touch(index)
                             }
                         } else {
@@ -84,6 +85,7 @@ Page {
                     onExploded: {
                         if(touched){
 
+                            privateStyle.play(Symbian.BasicItem)
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -149,22 +151,28 @@ Page {
         id: gameOverDialog
         signal privateClicked
         content:Column{
+
             Image{
+                height: 100
+                width: 100
+                x:100
                 source: "images/bomb5.png"
             }
-
             Text{
+                x:65
                 text:qsTr("Game Over")
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
+                x:40
                 text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
             Row{
                 id: inputRow
+                x:40
                 Text{
                     text:qsTr("Your name: ")
                     color: "white"
@@ -174,22 +182,24 @@ Page {
                     id:inputName
                     maximumLength: 7
                     width: UI.INPUT_SIZE
-                    text: "name"
+                    text: "bomber"
                     /*onAccepted: {
                         platformCloseSoftwareInputPanel()
                         gameOverDialog.accept()
                     }*/
                 }
             }
-            Item {
+            /*Item {
                 width: 20
                 height: 25
-            }
+            }*/
 
         }
         buttons: [
             Button{
+                x:120
                 text: qsTr("Ok")
+                width: 100
                 onClicked: gameOverDialog.accept()
             }
         ]

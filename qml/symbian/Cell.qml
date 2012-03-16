@@ -7,6 +7,7 @@ Rectangle {
     id:cellMain
 
     signal clicked
+    signal pressed
     signal exploded
     radius: 5
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
@@ -60,6 +61,9 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             cellMain.clicked()
+        }
+        onPressed: {
+            cellMain.pressed()
         }
     }
 
