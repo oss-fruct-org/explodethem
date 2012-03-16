@@ -7,7 +7,7 @@ Item {
     property string source:"images/mini-fire.png"
     property int w: 20
     property int h: 20
-    property int sec: 50
+    property int sec: 40
     property int vel: 200
     property int velocity: UI.VELOCITY
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width

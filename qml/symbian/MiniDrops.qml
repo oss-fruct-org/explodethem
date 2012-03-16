@@ -20,7 +20,7 @@ Item {
         y: parent.height/2 - height/2
 
         Behavior on x {
-            NumberAnimation {id:rd; duration: UI.VELOCITY*(UI.COL_COUNT+2); easing.type:Easing.Linear}
+            SmoothedAnimation {maximumEasingTime: 40; velocity: 160;duration: UI.VELOCITY*(UI.COL_COUNT+2); reversingMode: SmoothedAnimation.Sync}
         }
     }
 
@@ -34,7 +34,7 @@ Item {
         y: parent.height/2 - height/2
 
         Behavior on x {
-            NumberAnimation { duration: UI.VELOCITY*(UI.COL_COUNT+2);easing.type:Easing.Linear}
+            SmoothedAnimation {maximumEasingTime: 40; velocity: 160;duration: UI.VELOCITY*(UI.COL_COUNT+2);reversingMode: SmoothedAnimation.Sync}
         }
     }
 
@@ -48,7 +48,7 @@ Item {
                        //parent.height/2 - parent.height*(index-upD)/UI.COL_COUNT - height/2
 
         Behavior on y {
-            NumberAnimation {duration: UI.VELOCITY*(UI.ROW_COUNT+2);easing.type:Easing.Linear;}
+            SmoothedAnimation {maximumEasingTime: 40;velocity: 160;duration: UI.VELOCITY*(UI.ROW_COUNT+2);reversingMode: SmoothedAnimation.Sync}
         }
     }
 
@@ -62,7 +62,7 @@ Item {
                        //parent.height/2 + parent.height*(downD-index)/UI.COL_COUNT - height/2
 
         Behavior on y {
-            NumberAnimation { duration: UI.VELOCITY*(UI.ROW_COUNT+2);easing.type:Easing.Linear }
+            SmoothedAnimation {maximumEasingTime: 40;velocity: 160; duration: UI.VELOCITY*(UI.ROW_COUNT+2);reversingMode: SmoothedAnimation.Sync }
         }
     }
 }

@@ -175,7 +175,7 @@ Page {
                     text: "bomber"
                     Keys.onReturnPressed: {
                         platformCloseSoftwareInputPanel()
-                        gameOverDialog.accept()
+                        //gameOverDialog.accept()
                     }
                 }
             }

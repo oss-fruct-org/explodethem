@@ -34,10 +34,11 @@ Page {
     /*SoundEffect  {
         id: bombSound
         source: "audio/bomb4.wav"
+        volume: 0.3
     }*/
     SoundEffect  {
         id: noneSound
-        source: "audio/none.wav"
+        source: "audio/bomb4.wav"
     }
     Image {
         id:background
@@ -76,8 +77,8 @@ Page {
                                 //myModel.touch(index)
                             }
                         } else {
-                            if(!noneSound.playing)
-                                noneSound.play()
+                            /*if(!noneSound.playing)
+                                noneSound.play()*/
                         }
                     }
                     onExploded: {
@@ -136,8 +137,8 @@ Page {
     QueryDialog {
         id: nextLevelDialog
         icon: "images/bomb4.png"
-        titleText: qsTr("Next Level")
-        message: qsTr("+1 sparks")
+        titleText: qsTr("                       Next Level")
+        message: qsTr("\n                       +1 sparks\n")
         acceptButtonText: "Next"
         onAccepted: {
             gameModel.startLevel(++gamePlay.level)
@@ -201,7 +202,6 @@ Page {
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
-                    console.log("open")
                 }
                 else
                     inputRow.visible = false

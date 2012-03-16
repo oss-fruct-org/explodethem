@@ -42,11 +42,18 @@ Rectangle {
         paused: true
         //visible: false
     }*/
-    AnimatedImage {
+    /*AnimatedImage {
         id : bang;
-        source: "images/bang2.gif"
-        opacity: 0
+        anchors.centerIn: parent
+        source: "images/bang3.gif"
         paused: true
+        currentFrame: 1
+    }*/
+    Image {
+        id: bang
+        anchors.centerIn: parent
+        source: "images/bang.png"
+        opacity: 0
     }
 
     MouseArea{
@@ -60,28 +67,28 @@ Rectangle {
                 name: "big"
                 when: (t === 3)
                 PropertyChanges {target: bombIcon; height: cellMain.height}
-                PropertyChanges {target: bang; currentFrame: 0}
-                PropertyChanges {target: bang; paused: true}
+                //PropertyChanges {target: bang; currentFrame: 0}
+                //PropertyChanges {target: bang; paused: true}
                // PropertyChanges {target: bombs; currentFrame: 9}
             },State {
                 name: "medium"
                 when: (t === 2)
                 PropertyChanges {target: bombIcon; height: 4*cellMain.height/5}
-                PropertyChanges {target: bang; currentFrame: 0}
-                PropertyChanges {target: bang; paused: true}
+                //PropertyChanges {target: bang; currentFrame: 0}
+                //PropertyChanges {target: bang; paused: true}
                 //PropertyChanges {target: bombs; currentFrame: 5}
             },State {
                 name: "small"
                 when: (t === 1)
                 PropertyChanges {target: bombIcon; height: 7*cellMain.height/12}
-                PropertyChanges {target: bang; paused: true}
-                PropertyChanges {target: bang; currentFrame: 0}
+                //PropertyChanges {target: bang; paused: true}
+                //PropertyChanges {target: bang; currentFrame: 0}
                 //PropertyChanges {target: bombs; currentFrame: 1}
             }, State {
                 name: "none"
                 when: (t === 0)
                 PropertyChanges {target: bombIcon; height: 0}
-                PropertyChanges {target: bang; currentFrame: 5}
+                //PropertyChanges {target: bang; currentFrame: 5}
                 //PropertyChanges {target: bombs; currentFrame: 0}
 
             }
@@ -89,30 +96,28 @@ Rectangle {
     ]
     transitions: [
         Transition {
-            ScriptAction {script: {bang.opacity = 0.0}}
+            //ScriptAction {script: {bang.opacity = 0.0}}
             PropertyAnimation{properties: "height, width"; duration: 300; easing.type: Easing.InQuad}
         },Transition { to: "none"
-            /*SequentialAnimation {
+            SequentialAnimation {
                 ScriptAction { script: cellMain.exploded(); }
                 ScriptAction {
                     script: {
-                        bang.opacity = 1.0
+                        bang.opacity = 0.8
                     }
                 }
                 PropertyAnimation {
                     target: bang
-                    properties: "currentFrame"
-                    duration: 300
+                    properties: "opacity"
+                    duration: 90
                 }
                 ScriptAction {
                     script: {
                         bang.opacity = 0.0
                     }
                 }
-                ScriptAction { script: bang.paused = true}
-            }*/
+            }
         },Transition { from:"";to: "none"
-
         }
 
     ]

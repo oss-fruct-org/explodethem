@@ -45,11 +45,15 @@ PageStackWindow {
         id: aboutDialog
         icon: "images/about.png"
         titleText: qsTr("Explode Them 1.0")
-        acceptButtonText: "Other applications"
+        acceptButtonText: "Other apps"
+        rejectButtonText: "Close"
         message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.")
 
         onAccepted: {
             Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")
+            aboutDialog.close()
+        }
+        onRejected: {
             aboutDialog.close()
         }
     }

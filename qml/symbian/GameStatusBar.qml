@@ -22,7 +22,7 @@ Image {
     }
     Text{
         id:levelText
-        anchors{left: parent.left;leftMargin: 320}
+        anchors{left: parent.left;leftMargin: 250}
         text: qsTr("Level: ") + level
         font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText
@@ -37,14 +37,16 @@ Image {
     }
     Image{
         source: "images/spark.png"
-        height: 70
-        anchors{left: sparksDigit.right; leftMargin: -17;
+        height: 42
+        width: 32
+        anchors{left: sparksDigit.right; leftMargin: -10;
                 verticalCenter: sparksDigit.verticalCenter; verticalCenterOffset: -10}
     }
     Image{
         source: "images/spark.png"
-        height: 70
-        anchors{right: sparksDigit.left; rightMargin: -17;
+        height: 42
+        width: 32
+        anchors{right: sparksDigit.left; rightMargin: -10;
                 verticalCenter: sparksDigit.verticalCenter; verticalCenterOffset: -10}
     }
 

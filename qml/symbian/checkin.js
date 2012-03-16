@@ -34,7 +34,7 @@ WorkerScript.onMessage = function(msg) {
             if(rand === 2){
                 msg.model.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
             } else {
-                rand=getRandomInt(0,6+msg.level-(msg.level%2))
+                rand=getRandomInt(0,6+(msg.level-(msg.level%2))/2)
                 if(rand === 3)
                     msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
                 else if(rand === 2 || rand === 1 || rand === 0)

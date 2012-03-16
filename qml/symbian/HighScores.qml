@@ -105,7 +105,7 @@ Page{
                     text: (index+1)+"."
                     color:id === highScores.current ? "red" : "white"
                     font.pixelSize:UI.FONT_SIZE
-                    anchors{right:parent.horizontalCenter; rightMargin: 130}
+                    anchors{right:parent.horizontalCenter; rightMargin: 105}
                     style: Text.RichText
                     styleColor: "black"
                 }
@@ -121,7 +121,7 @@ Page{
                     text: " " + score;
                     color: "#e64b45"
                     font.pixelSize:UI.FONT_SIZE
-                    anchors{left:scoreId.right; leftMargin: 200}
+                    anchors{left:scoreId.right; leftMargin: 180}
                     style: Text.RichText
                     styleColor: "black"
                 }
@@ -143,9 +143,10 @@ Page{
     QueryDialog {
         id: clearScoresDialog
         icon: "images/what.png"
+        titleText: "Clear"
         acceptButtonText: qsTr("Yes")
         rejectButtonText: qsTr("No")
-        message: qsTr("Do you really want to delete scores?")
+        message: qsTr("Do you really want to delete scores?\n")
         onAccepted: {
             DB.reset()
         }

@@ -82,7 +82,7 @@ Page{
         Rectangle {
             width: highScores.width;
             color: "lightsteelblue"; radius: 5
-            opacity: 0.7
+            opacity: highScores.current < 0? 0 : 0.7
             y: highScores.current < 0? highScores.y : list.currentItem.y
             Behavior on y {
                 SpringAnimation {
@@ -136,7 +136,6 @@ Page{
         anchors{top: list.bottom; topMargin: 20; horizontalCenter: parent.horizontalCenter}
         onClicked: {
             pageStack.pop()
-            gamePlay.input.platformCloseSoftwareInputPanel()
             gamePlay.init()
         }
     }

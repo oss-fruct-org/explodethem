@@ -29,7 +29,7 @@ Rectangle {
     border.width: 1
 
     property int digit: 0
-    property int size: 40
+    property int size: 30
 
     onDigitChanged: { digitPath.currentIndex = digit; }
 

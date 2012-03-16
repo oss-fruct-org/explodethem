@@ -38,7 +38,7 @@ Page {
     Component {
         id: appDelegate
         Rectangle {
-            width: 360; height: 360
+            width: 260; height: 280
             scale: PathView.iconScale
             radius: 30
             Text {
@@ -71,7 +71,7 @@ Page {
     Rectangle{
         id:centRect
         width: parent.width; height: parent.width
-        anchors{bottom: parent.bottom; bottomMargin: 50}
+        anchors{bottom: parent.bottom; bottomMargin: 100}
         opacity: 0
     }
     PathView {
@@ -87,14 +87,14 @@ Page {
         model: appModel
         delegate: appDelegate
         path: Path {
-            startX: -440
+            startX: -310
             startY: 100
             PathAttribute { name: "iconScale"; value: 0.5 }
             //PathQuad { x: gamePlay.width/2; y: 150; controlX: 50; controlY: 200 }
             PathLine {x: gamePlay.width/2; y: 200}
             PathAttribute { name: "iconScale"; value: 1.0 }
             //PathQuad { x: gamePlay.width+300; y: 50; controlX: 350; controlY: 200 }
-            PathLine { x: gamePlay.width+440; y: 100;}
+            PathLine { x: gamePlay.width+310; y: 100;}
             PathAttribute { name: "iconScale"; value: 0.5 }/*
             PathLine { x: gamePlay.width+240+gamePlay.width/2; y: 200;}
             PathAttribute { name: "iconScale"; value: 1 }*/

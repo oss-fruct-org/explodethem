@@ -8,7 +8,7 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    //QApplication::setGraphicsSystem("openvg");
+    QApplication::setGraphicsSystem("openvg");
     QScopedPointer<QApplication> app(createApplication(argc, argv));
     /*QTranslator qtTranslator;
     if(qtTranslator.load("explodethem_ru")){
@@ -19,8 +19,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
   // qmlRegisterType<MyModel>("models", 1, 0, "MyModel");
     QmlApplicationViewer viewer;
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
-    viewer.setMainQmlFile(QLatin1String("qml/meego/main.qml"));
-   // viewer.setMainQmlFile(QLatin1String("qml/symbian/main.qml"));
+    // viewer.setMainQmlFile(QLatin1String("qml/meego/main.qml"));
+    viewer.setMainQmlFile(QLatin1String("qml/symbian/main.qml"));
     viewer.showExpanded();
 
     return app->exec();
