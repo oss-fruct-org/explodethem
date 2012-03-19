@@ -21,6 +21,6 @@ Page{
         id:background
         anchors.fill: parent
         opacity: 0.8
-        source: "images/background.jpg"
+        source: "qrc:/qml/symbian/images/background.jpg"
     }
 }

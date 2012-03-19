@@ -27,7 +27,8 @@ Item{
 
     function move() {
         var msg = {'action': 'move', 'model': listModel};
-        worker.sendMessage(msg);
+        if(worker !== null)
+            worker.sendMessage(msg);
     }
 
 
@@ -82,5 +83,18 @@ Item{
         onTriggered: {
             move()
         }
+    }
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.active){
+            }
+            else{
+            }
+        }
+    }
+    Component.onDestruction: {
+        worker.source = ""
+        worker.destroy()
     }
 }

@@ -1,5 +1,5 @@
 #include <QtGui/QApplication>
-#include <QTranslator>
+//#include <QTranslator>
 //#include <qdeclarative.h>
 #include "qmlapplicationviewer.h"
 //#include <QDebug>

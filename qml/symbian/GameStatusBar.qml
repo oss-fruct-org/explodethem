@@ -10,7 +10,7 @@ Image {
 
     width: gamePlay.width
     z:1
-    source: "images/bar.jpg"
+    source: "qrc:/qml/symbian/images/bar.jpg"
     Text{
         id:scoreText
         anchors{left: parent.left}
@@ -36,14 +36,14 @@ Image {
         positions: 2
     }
     Image{
-        source: "images/spark.png"
+        source: "qrc:/qml/symbian/images/spark.png"
         height: 42
         width: 32
         anchors{left: sparksDigit.right; leftMargin: -10;
                 verticalCenter: sparksDigit.verticalCenter; verticalCenterOffset: -10}
     }
     Image{
-        source: "images/spark.png"
+        source: "qrc:/qml/symbian/images/spark.png"
         height: 42
         width: 32
         anchors{right: sparksDigit.left; rightMargin: -10;

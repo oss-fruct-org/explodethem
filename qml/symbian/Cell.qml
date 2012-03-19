@@ -16,11 +16,11 @@ Rectangle {
     Image {
         id: bombIcon
         source: if(t === 1){
-                    return "images/bomb.png"
+                    return "qrc:/qml/symbian/images/bomb.png"
                 } else if( t === 2) {
-                    return "images/bomb-bandage.png"
+                    return "qrc:/qml/symbian/images/bomb-bandage.png"
                 } else if(t === 3){
-                    return "images/red-bomb.png"
+                    return "qrc:/qml/symbian/images/red-bomb.png"
                 } else
                     return ""
         anchors.centerIn: parent
@@ -53,7 +53,7 @@ Rectangle {
     Image {
         id: bang
         anchors.centerIn: parent
-        source: "images/bang.png"
+        source: "qrc:/qml/symbian/images/bang.png"
         opacity: 0
     }
 
@@ -113,7 +113,8 @@ Rectangle {
                 PropertyAnimation {
                     target: bang
                     properties: "opacity"
-                    duration: 90
+                    duration: 100
+                    to: 0.7
                 }
                 ScriptAction {
                     script: {

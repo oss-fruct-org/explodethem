@@ -47,7 +47,7 @@ Page{
         id:background
         anchors.fill: parent
         opacity: 0.8
-        source: "images/background.jpg"
+        source: "qrc:/qml/symbian/images/background.jpg"
     }
     Text{
         id:titleHS
@@ -142,7 +142,7 @@ Page{
 
     QueryDialog {
         id: clearScoresDialog
-        icon: "images/what.png"
+        icon: "qrc:/qml/symbian/images/what.png"
         titleText: "Clear"
         acceptButtonText: qsTr("Yes")
         rejectButtonText: qsTr("No")

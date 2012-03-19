@@ -4,7 +4,7 @@ import "UIConstants.js" as UI
 
 Item {
     id:miniItems
-    property string source:"images/mini-fire2.png"
+    property string source:"qrc:/qml/symbian/images/mini-fire2.png"
     property int w: 20
     property int h: 20
     property int velocity: UI.VELOCITY

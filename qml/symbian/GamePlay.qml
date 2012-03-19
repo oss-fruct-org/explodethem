@@ -43,7 +43,7 @@ Page {
     Image {
         id:background
         anchors.fill: parent
-        source: "images/background.jpg"
+        source: "qrc:/qml/symbian/images/background.jpg"
     }
     GameStatusBar{
         id:statusBar
@@ -138,7 +138,7 @@ Page {
 
     QueryDialog {
         id: nextLevelDialog
-        icon: "images/bomb4.png"
+        icon: "qrc:/qml/symbian/images/bomb4.png"
         titleText: qsTr("                       Next Level")
         message: qsTr("\n                       +1 sparks\n")
         acceptButtonText: "Next"
@@ -152,12 +152,12 @@ Page {
         signal privateClicked
         content:Column{
 
-            Image{
+            /*Image{
                 height: 100
                 width: 100
                 x:100
-                source: "images/bomb5.png"
-            }
+                source: "qrc:/qml/symbian/images/bomb5.png"
+            }*/
             Text{
                 x:65
                 text:qsTr("Game Over")

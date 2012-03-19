@@ -8,6 +8,7 @@ import QtMultimediaKit 1.1
 Page {
     id:gamePlay
 
+    property alias worker: gameModel.worker
     property int level
     property int score
     property int count: 0

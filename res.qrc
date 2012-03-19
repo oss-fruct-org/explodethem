@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/symbian/images/about.png</file>
+        <file>qml/symbian/images/background.jpg</file>
+        <file>qml/symbian/images/bang.gif</file>
+        <file>qml/symbian/images/bang.png</file>
+        <file>qml/symbian/images/bang2.gif</file>
+        <file>qml/symbian/images/bang3.gif</file>
+        <file>qml/symbian/images/bar.jpg</file>
+        <file>qml/symbian/images/bomb.png</file>
+        <file>qml/symbian/images/bomb1.png</file>
+        <file>qml/symbian/images/bomb2.png</file>
+        <file>qml/symbian/images/bomb4.png</file>
+        <file>qml/symbian/images/bomb5.png</file>
+        <file>qml/symbian/images/bomb-bandage.png</file>
+        <file>qml/symbian/images/bombs.gif</file>
+        <file>qml/symbian/images/mini-fire.png</file>
+        <file>qml/symbian/images/mini-fire2.png</file>
+        <file>qml/symbian/images/ou2-bomb.png</file>
+        <file>qml/symbian/images/red-bomb.png</file>
+        <file>qml/symbian/images/spark.png</file>
+        <file>qml/symbian/images/what.png</file>
+    </qresource>
+</RCC>

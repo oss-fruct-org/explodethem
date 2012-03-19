@@ -83,4 +83,13 @@ Item{
             move()
         }
     }
+    Connections {
+        target: Qt.application
+        onActiveChanged: {
+            if (Qt.application.active){
+            }
+            else{
+            }
+        }
+    }
 }

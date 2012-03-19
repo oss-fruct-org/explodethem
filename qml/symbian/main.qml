@@ -43,7 +43,7 @@ PageStackWindow {
     }
     QueryDialog {
         id: aboutDialog
-        icon: "images/about.png"
+        icon: "qrc:/qml/symbian/images/about.png"
         titleText: qsTr("Explode Them 1.0")
         acceptButtonText: "Other apps"
         rejectButtonText: "Close"
@@ -60,4 +60,5 @@ PageStackWindow {
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
     FontLoader{id: statusFont; source: "coolvetica.ttf"}
+
 }

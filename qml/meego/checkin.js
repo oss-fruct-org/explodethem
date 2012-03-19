@@ -26,6 +26,7 @@ WorkerScript.onMessage = function(msg) {
             WorkerScript.sendMessage({ 'needBang': true, 'needNext': false, 'isMoved': true})
         } else if (type > 0){
             msg.model.set(msg.id, {t: type+1})
+            WorkerScript.sendMessage()
         }
     } else if(msg.action === 'startLevel'){
         var rand

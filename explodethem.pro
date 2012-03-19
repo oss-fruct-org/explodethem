@@ -19,7 +19,10 @@ symbian:TARGET.UID3 = 0xE19A9982
 
 # Allow network access on Symbian
 symbian:TARGET.CAPABILITY += NetworkServices
-
+symbian:{
+    DEPLOYMENT.display_name = Explode Them
+    VERSION = 1.0.1
+}
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
 # CONFIG += mobility
@@ -38,18 +41,25 @@ SOURCES += main.cpp \
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
-    qtc_packaging/debian_harmattan/rules \
-    qtc_packaging/debian_harmattan/README \
-    qtc_packaging/debian_harmattan/manifest.aegis \
-    qtc_packaging/debian_harmattan/copyright \
-    qtc_packaging/debian_harmattan/control \
-    qtc_packaging/debian_harmattan/compat \
-    qtc_packaging/debian_harmattan/changelog \
-    qtc_packaging/debian_harmattan/explodethem.conf
+!symbian:{
+    OTHER_FILES += \
+        qtc_packaging/debian_harmattan/rules \
+        qtc_packaging/debian_harmattan/README \
+        qtc_packaging/debian_harmattan/manifest.aegis \
+        qtc_packaging/debian_harmattan/copyright \
+        qtc_packaging/debian_harmattan/control \
+        qtc_packaging/debian_harmattan/compat \
+        qtc_packaging/debian_harmattan/changelog \
+        qtc_packaging/debian_harmattan/explodethem.conf
+}
 
 TRANSLATIONS = qml/meego/translations/explodethem_ru.ts
 
 gameclassify.files += qtc_packaging/debian_harmattan/explodethem.conf
 gameclassify.path = /usr/share/policy/etc/syspart.conf.d
 INSTALLS += gameclassify
+
+symbian:{
+    RESOURCES += \
+        res.qrc
+}
