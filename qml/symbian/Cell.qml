@@ -110,11 +110,12 @@ Rectangle {
                         bang.opacity = 0.8
                     }
                 }
+                PauseAnimation { duration: 30 }
                 PropertyAnimation {
                     target: bang
                     properties: "opacity"
-                    duration: 120
-                    to: 0.7
+                    duration: 90
+                    to: 0.3
                 }
                 ScriptAction {
                     script: {
