@@ -1,6 +1,7 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import "UIConstants.js" as UI
 
 PageStackWindow {
 
@@ -54,8 +55,84 @@ PageStackWindow {
             Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")
         }
     }
+    QueryDialog {
+        id: fullVersion
+        titleText: qsTr("Full Version")
+        acceptButtonText: "Buy Full version"
+        rejectButtonText: "Play Free version"
+        message: qsTr("Features:\n-splash effect       \n -3 difficulty level   \n -new bomb's types")
+        onPrivateClicked: {
+            fullVersion.close()
+        }
+        onAccepted: {
+            Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")
+        }
+        onRejected: {
+            fullVersion.close()
+        }
+    }
+
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
     FontLoader{id: statusFont; source: "coolvetica.ttf"}
+
+
+    Dialog{
+        id: levelDialog
+        signal privateClicked
+        content:Column{
+
+            Text{
+                text:qsTr("Select difficulty level")
+                x:-15
+                color: "white"
+                font.pixelSize:UI.FONT_SIZE
+            }
+            Item {
+                width: 20
+                height: 25
+            }
+
+        }
+        buttons: [
+            Column{
+                Button{
+                    text: qsTr("Hard")
+                    onClicked: {
+                        gamePlay.difficult = UI.HARD
+                        levelDialog.accept()
+                    }
+                }Item {
+                    width: 20
+                    height: 25
+                }Button{
+                    text: qsTr("Medium")
+                    onClicked: {
+                        gamePlay.difficult = UI.MEDIUM
+                        levelDialog.accept()
+                    }
+                }Item {
+                    width: 20
+                    height: 25
+                }Button{
+                    text: qsTr("Easy")
+                    onClicked: {
+                        gamePlay.difficult = UI.EASY
+                        levelDialog.accept()
+                    }
+                }
+            }
+        ]
+
+        onPrivateClicked: {}
+        onAccepted: {
+            gamePlay.init()
+        }
+
+    }
+    Component.onCompleted: {
+        //fullVersion.open()
+        levelDialog.open()
+    }
 
 }

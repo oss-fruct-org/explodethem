@@ -21,6 +21,15 @@ Image {
         color:"white"
     }
     Text{
+        id:explodedText
+        anchors{left: parent.left; top:scoreText.bottom}
+        text: qsTr(" Bomb: ") + exploded
+        font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
+        style: Text.RichText
+        styleColor: "black"
+        color:"white"
+    }
+    Text{
         id:levelText
         anchors{left: parent.left;leftMargin: 320}
         text: qsTr("Level: ") + level

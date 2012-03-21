@@ -1,5 +1,9 @@
 .pragma library
 
+var EASY = 4
+var MEDIUM = 5
+var HARD = 6
+
 var COL_COUNT = 6;
 var ROW_COUNT = 8;
 var VELOCITY = 380

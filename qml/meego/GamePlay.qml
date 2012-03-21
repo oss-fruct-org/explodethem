@@ -8,8 +8,11 @@ import QtMultimediaKit 1.1
 Page {
     id:gamePlay
 
+    property int difficult: -1
     property int level
+    property int exploded
     property int score
+    property double rate
     property int count: 0
     property int bestScore: 0
     property int sparks
@@ -18,12 +21,19 @@ Page {
 
     function init(){
         level = 1
+        exploded = 0
         score = 0
         sparks = UI.START_COUNT_SPARKS
         touched = false
         gameModel.startLevel(gamePlay.level)
         //gamePlay.bestScore = highScores.getBest()
         //myModel.startLevel(1);
+        if(difficult === UI.HARD)
+            rate = 1.3
+        else if(difficult === UI.EASY)
+            rate = 0.7
+        else
+            rate = 1
     }
 
     width: parent.width
@@ -82,8 +92,9 @@ Page {
                     }
                     onExploded: {
                         if(touched){
-                            gamePlay.score++
-                            if(count === UI.UP_COUNT){
+                            gamePlay.exploded++
+                            gamePlay.score += 10*gamePlay.rate
+                            if(count === gamePlay.difficult){
                                 gamePlay.sparks++
                                 gamePlay.count = 0
                             } else {
@@ -156,7 +167,7 @@ Page {
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
-                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Your score: ")+gamePlay.exploded//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
@@ -195,7 +206,7 @@ Page {
 
         onStatusChanged: {
             if(gameOverDialog.status === DialogStatus.Opening){
-                if(highScores.getScore(10) < gamePlay.score){
+                if(highScores.getScore(10) < gamePlay.exploded){
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
@@ -206,25 +217,24 @@ Page {
             if(gameOverDialog.status === DialogStatus.Closing){
                 var name
                 inputName.focus = false
-                if(gamePlay.score ===0)
+                if(gamePlay.exploded ===0)
                      name = "pacifist"
                 else
                     name = inputName.text
-                highScores.current = highScores.setScore(name, gamePlay.score)
+                highScores.current = highScores.setScore(name, gamePlay.exploded)
                 pageStack.push(highScores)
             }
         }
     }
 
-
     Component.onCompleted: {
         for(var i=0; i<UI.COL_COUNT*UI.ROW_COUNT; i++)
             gameModel.model.append({t: 0, upD:UI.NULL, downD:UI.NULL, rightD:UI.NULL,leftD:UI.NULL, audio: gameModel.getRandomInt(0,1)})
-        init()
     }
     onStatusChanged: {
         if(gamePlay.status === PageStatus.Activating)
-            gameModel.timer.start()
+            if(difficult !== -1)
+                gameModel.timer.start()
         else if(gamePlay.status === PageStatus.Deactivating)
             gameModel.timer.stop()
     }
