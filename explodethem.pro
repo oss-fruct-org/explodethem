@@ -1,7 +1,7 @@
 # Add more folders to ship with the application, here
 
-#folder_01.source = qml/symbian
-folder_01.source = qml/meego
+folder_01.source = qml/symbian
+#folder_01.source = qml/meego
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
@@ -20,6 +20,7 @@ symbian:TARGET.UID3 = 0xE19A9982
 # Allow network access on Symbian
 symbian:TARGET.CAPABILITY += NetworkServices
 symbian:{
+    ICON = explodethem.svg
     DEPLOYMENT.display_name = Explode Them
     VERSION = 1.0.1
 }
@@ -59,7 +60,6 @@ gameclassify.files += qtc_packaging/debian_harmattan/explodethem.conf
 gameclassify.path = /usr/share/policy/etc/syspart.conf.d
 INSTALLS += gameclassify
 
-symbian:{
-    RESOURCES += \
-        res.qrc
-}
+#symbian|simulator{
+    RESOURCES += res.qrc
+#}

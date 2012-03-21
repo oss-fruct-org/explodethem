@@ -113,7 +113,7 @@ Rectangle {
                 PropertyAnimation {
                     target: bang
                     properties: "opacity"
-                    duration: 100
+                    duration: 120
                     to: 0.7
                 }
                 ScriptAction {

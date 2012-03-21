@@ -14,7 +14,6 @@ Page {
     property int bestScore: 0
     property int sparks
     property bool touched: false
-    property alias input: inputName
 
     function init(){
         level = 1
@@ -136,7 +135,7 @@ Page {
         }
     }
 
-    QueryDialog {
+    /*QueryDialog {
         id: nextLevelDialog
         icon: "qrc:/qml/symbian/images/bomb4.png"
         titleText: qsTr("                       Next Level")
@@ -145,95 +144,25 @@ Page {
         onAccepted: {
             gameModel.startLevel(++gamePlay.level)
         }
-    }
+    }*/
 
-    Dialog{
-        id: gameOverDialog
-        signal privateClicked
-        content:Column{
-
-            /*Image{
-                height: 100
-                width: 100
-                x:100
-                source: "qrc:/qml/symbian/images/bomb5.png"
-            }*/
-            Text{
-                x:65
-                text:qsTr("Game Over")
-                color: "white"
-                font.pixelSize:UI.FONT_SIZE*1.6
-            }
-            Text{
-                x:40
-                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
-                color: "white"
-                font.pixelSize:UI.FONT_SIZE
-            }
-            Row{
-                id: inputRow
-                x:40
-                Text{
-                    text:qsTr("Your name: ")
-                    color: "white"
-                    font.pixelSize:UI.FONT_SIZE
-                }
-                TextField{
-                    id:inputName
-                    maximumLength: 7
-                    width: UI.INPUT_SIZE
-                    text: "bomber"
-                    /*onAccepted: {
-                        platformCloseSoftwareInputPanel()
-                        gameOverDialog.accept()
-                    }*/
-                }
-            }
-            /*Item {
-                width: 20
-                height: 25
-            }*/
-
-        }
-        buttons: [
-            Button{
-                x:120
-                text: qsTr("Ok")
-                width: 100
-                onClicked: gameOverDialog.accept()
-            }
-        ]
-
-        onPrivateClicked: {}
-
-        onStatusChanged: {
-            if(gameOverDialog.status === DialogStatus.Opening){
-                if(highScores.getScore(10) < gamePlay.score){
-                    inputRow.visible = true
-                    inputName.focus = true
-                    inputName.selectAll()
-                }
-                else
-                    inputRow.visible = false
-            }
-            if(gameOverDialog.status === DialogStatus.Closing){
-                var name
-                inputName.focus = false
-                if(gamePlay.score ===0)
-                     name = "pacifist"
-                else
-                    name = inputName.text
-                highScores.current = highScores.setScore(name, gamePlay.score)
-                pageStack.push(highScores)
-            }
+    NextLevelDialog{
+        id:nextLevelDialog
+        onAccepted: {
+            gameModel.startLevel(++gamePlay.level)
         }
     }
+    GameOverDialog{
+        id:gameOverDialog
+    }
+
 
 
     Component.onCompleted: {
         for(var i=0; i<UI.COL_COUNT*UI.ROW_COUNT; i++)
             gameModel.model.append({t: 0, upD:UI.NULL, downD:UI.NULL, rightD:UI.NULL,leftD:UI.NULL, audio: gameModel.getRandomInt(0,1)})
         init()
+        //gameOverDialog.open()
     }
     onStatusChanged: {
         if(gamePlay.status === PageStatus.Activating)

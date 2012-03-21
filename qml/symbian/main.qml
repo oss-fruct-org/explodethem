@@ -23,6 +23,7 @@ PageStackWindow {
         id: commonTools
         visible: true
         ToolButton {
+            id: toolbarMenuIcon
             iconSource: "toolbar-menu"
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
