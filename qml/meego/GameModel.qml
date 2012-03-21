@@ -1,5 +1,6 @@
 import QtQuick 1.1
 import "UIConstants.js" as UI
+import QtMobility.sensors 1.2
 Item{
     id: gameModel
 
@@ -32,6 +33,7 @@ Item{
     }
 
 
+
     function touch(id){
         var msg = {'action': 'touch', 'model': listModel, 'id': id};
         worker.sendMessage(msg);
@@ -54,7 +56,46 @@ Item{
         gameModel.__inProgress = false
         nextlevel()
     }
-
+    Accelerometer{
+        id:sens
+        property double preX: 0
+        property double preY: 0
+        property double preZ: 0
+        property bool flag: true
+        active: true
+        dataRate: 2
+        outputRange: 2
+        onReadingChanged: {
+            if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>70&&0<reading.x-preX){
+                if(flag){
+                    //console.log("left");
+                    if(!gameModel.__inProgress){
+                        worker.sendMessage({'action': 'splash', 'direction':'left', 'model': listModel});
+                        gamePlay.touched = true
+                        timer.start()
+                    }
+                    flag = false
+                } else
+                flag = true
+            } else if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>70&&0>reading.x-preX){
+                if(flag){
+                    //console.log("right");
+                    if(!gameModel.__inProgress){
+                        worker.sendMessage({'action': 'splash', 'direction':'right', 'model': listModel});
+                        gamePlay.touched = true
+                        timer.start()
+                    }
+                    flag = false
+                } else
+                    flag = true
+            } else
+                flag = true
+            preX = reading.x; preY = reading.y; preZ = reading.z
+        }
+        onSensorError: {
+            console.log(sens.error)
+        }
+    }
     ListModel {
          id: listModel
     }
@@ -94,7 +135,7 @@ Item{
         }
     }
     Component.onDestruction: {
-        worker.source = ""
-        worker.destroy()
+       /* worker.source = ""
+        worker.destroy()*/
     }
 }

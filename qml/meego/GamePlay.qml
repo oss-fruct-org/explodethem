@@ -8,7 +8,6 @@ import QtMultimediaKit 1.1
 Page {
     id:gamePlay
 
-    property alias worker: gameModel.worker
     property int level
     property int score
     property int count: 0
@@ -83,7 +82,6 @@ Page {
                     }
                     onExploded: {
                         if(touched){
-
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++
@@ -201,7 +199,6 @@ Page {
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
-                    console.log("open")
                 }
                 else
                     inputRow.visible = false
