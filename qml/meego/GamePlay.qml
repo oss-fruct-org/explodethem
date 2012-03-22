@@ -16,6 +16,7 @@ Page {
     property int count: 0
     property int bestScore: 0
     property int sparks
+    property int shake
     property bool touched: false
     property alias input: inputName
 
@@ -24,6 +25,7 @@ Page {
         exploded = 0
         score = 0
         sparks = UI.START_COUNT_SPARKS
+        shake = 3
         touched = false
         gameModel.startLevel(gamePlay.level)
         //gamePlay.bestScore = highScores.getBest()
@@ -127,7 +129,6 @@ Page {
         id:gameModel
         onNextlevel: {
             bombSound.stop()
-            gamePlay.sparks++
             nextLevelDialog.open()
         }
         onBang: {
@@ -150,6 +151,7 @@ Page {
         message: qsTr("+1 sparks")
         onPrivateClicked: {
             gameModel.startLevel(++gamePlay.level)
+            gamePlay.sparks++
         }
     }
 
@@ -206,7 +208,7 @@ Page {
 
         onStatusChanged: {
             if(gameOverDialog.status === DialogStatus.Opening){
-                if(highScores.getScore(10) < gamePlay.exploded){
+                if(highScores.getScore(10) < gamePlay.score){
                     inputRow.visible = true
                     inputName.focus = true
                     inputName.selectAll()
@@ -217,11 +219,11 @@ Page {
             if(gameOverDialog.status === DialogStatus.Closing){
                 var name
                 inputName.focus = false
-                if(gamePlay.exploded ===0)
+                if(gamePlay.score === 0)
                      name = "pacifist"
                 else
                     name = inputName.text
-                highScores.current = highScores.setScore(name, gamePlay.exploded)
+                highScores.current = highScores.setScore(name, gamePlay.score)
                 pageStack.push(highScores)
             }
         }
@@ -233,8 +235,10 @@ Page {
     }
     onStatusChanged: {
         if(gamePlay.status === PageStatus.Activating)
-            if(difficult !== -1)
+            if(difficult !== -1){
                 gameModel.timer.start()
+                console.log("false start")
+            }
         else if(gamePlay.status === PageStatus.Deactivating)
             gameModel.timer.stop()
     }

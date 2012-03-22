@@ -6,7 +6,6 @@ Item{
 
     property alias model: listModel
     property alias timer: timer
-    property bool __inProgress: false
     property int count: 0
     property bool needNext: false
     property bool isMoved: false
@@ -53,7 +52,6 @@ Item{
 
     function goNextLevel(){
         timer.stop()
-        gameModel.__inProgress = false
         nextlevel()
     }
     Accelerometer{
@@ -61,35 +59,17 @@ Item{
         property double preX: 0
         property double preY: 0
         property double preZ: 0
-        property bool flag: true
         active: true
         dataRate: 2
-        outputRange: 2
         onReadingChanged: {
-            if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>70&&0<reading.x-preX){
-                if(flag){
-                    //console.log("left");
-                    if(!gameModel.__inProgress){
-                        worker.sendMessage({'action': 'splash', 'direction':'left', 'model': listModel});
-                        gamePlay.touched = true
-                        timer.start()
-                    }
-                    flag = false
-                } else
-                flag = true
-            } else if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>70&&0>reading.x-preX){
-                if(flag){
-                    //console.log("right");
-                    if(!gameModel.__inProgress){
-                        worker.sendMessage({'action': 'splash', 'direction':'right', 'model': listModel});
-                        gamePlay.touched = true
-                        timer.start()
-                    }
-                    flag = false
-                } else
-                    flag = true
-            } else
-                flag = true
+            if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>100 && shake>0){
+                if(!gameModel.isInProgress()){
+                    worker.sendMessage({'action': 'splash', 'model': listModel});
+                    gamePlay.touched = true
+                    shake--
+                    timer.start()
+                }
+            }
             preX = reading.x; preY = reading.y; preZ = reading.z
         }
         onSensorError: {
@@ -105,11 +85,10 @@ Item{
         source: "checkin.js"
 
         onMessage:{
-            if(messageObject.needNext)
+            if(messageObject.needNext && gamePlay.difficult !== -1)
                 gameModel.goNextLevel()
             if(!messageObject.isMoved){
                 timer.stop()
-                gameModel.__inProgress = false
                 gameModel.stopped()
             }
             if(messageObject.needBang)

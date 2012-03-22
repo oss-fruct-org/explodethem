@@ -38,7 +38,7 @@ PageStackWindow {
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
-            MenuItem { text: qsTr("Restart"); onClicked: gamePlay.init()}
+            MenuItem { text: qsTr("Restart"); onClicked: levelDialog.open()}
             MenuItem { text: qsTr("Quit"); onClicked: Qt.quit()}
         }
     }

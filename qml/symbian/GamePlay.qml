@@ -73,7 +73,7 @@ Page {
                                 }
                                 touched = true
                                 gameModel.touch(index)
-                                privateStyle.play(Symbian.Button)
+                                privateStyle.play(Symbian.BasicItem)
                                 //myModel.touch(index)
                             }
                         } else {
@@ -84,7 +84,7 @@ Page {
                     onExploded: {
                         if(touched){
 
-                            privateStyle.play(Symbian.BasicItem)
+                            //privateStyle.play(Symbian.BasicItem)
                             gamePlay.score++
                             if(count === UI.UP_COUNT){
                                 gamePlay.sparks++

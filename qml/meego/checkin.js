@@ -30,18 +30,10 @@ WorkerScript.onMessage = function(msg) {
         }
     } else if(msg.action === 'splash'){
         needBang = false;
-        if(msg.direction === 'right')
-            for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
-                if(msg.model.get(i).t === 3){
-                    needBang = true
-                    msg.model.set(i,{t: 0, upD:NULL, downD:NULL, rightD:i+1,leftD:NULL})
-                }
-            }
-        else
-            for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
+        for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
             if(msg.model.get(i).t === 3){
                 needBang = true
-                msg.model.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:i-1})
+                msg.model.set(i,{t: 0, upD: i - COL_COUNT, downD: i+ COL_COUNT, leftD: i-1,rightD: i+1})
             }
         }
         WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': false, 'isMoved': true})

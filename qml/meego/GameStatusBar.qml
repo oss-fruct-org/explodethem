@@ -20,7 +20,7 @@ Image {
         styleColor: "black"
         color:"white"
     }
-    Text{
+    /*Text{
         id:explodedText
         anchors{left: parent.left; top:scoreText.bottom}
         text: qsTr(" Bomb: ") + exploded
@@ -28,11 +28,20 @@ Image {
         style: Text.RichText
         styleColor: "black"
         color:"white"
-    }
+    }*/
     Text{
         id:levelText
         anchors{left: parent.left;leftMargin: 320}
         text: qsTr("Level: ") + level
+        font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
+        style: Text.RichText
+        styleColor: "black"
+        color:"white"
+    }
+    Text{
+        id:explodedText
+        anchors{left: levelText.left; top:levelText.bottom}
+        text: qsTr("Shake: ") + shake
         font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
         style: Text.RichText
         styleColor: "black"

@@ -107,7 +107,7 @@ Rectangle {
                 ScriptAction { script: cellMain.exploded(); }
                 ScriptAction {
                     script: {
-                        bang.opacity = 0.8
+                        bang.opacity = 1
                     }
                 }
                 PauseAnimation { duration: 30 }
