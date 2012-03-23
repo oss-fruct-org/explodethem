@@ -33,6 +33,7 @@ Page {
         ListElement { name: "If the bomb acuires a red color then next push will cause explosion. You can't push the bomb until reaction doesn't stop "; icon: "images/bomb-bandage.png" }
         ListElement { name: "You get one spark after every fifth bomb explosion and at the end of level"; icon: "images/red-bomb.png" }
         ListElement { name: "The main goal is to explode as many bombs as possible using the least amount of sparks"; icon: "images/red-bomb.png" }
+        ListElement { name: "At at game start you have three shakes. Shake the phone and all red bombs will explode."; icon: "images/red-bomb.png" }
     }
 
     Component {
@@ -87,14 +88,14 @@ Page {
         model: appModel
         delegate: appDelegate
         path: Path {
-            startX: -440
+            startX: -640
             startY: 100
             PathAttribute { name: "iconScale"; value: 0.5 }
             //PathQuad { x: gamePlay.width/2; y: 150; controlX: 50; controlY: 200 }
             PathLine {x: gamePlay.width/2; y: 200}
             PathAttribute { name: "iconScale"; value: 1.0 }
             //PathQuad { x: gamePlay.width+300; y: 50; controlX: 350; controlY: 200 }
-            PathLine { x: gamePlay.width+440; y: 100;}
+            PathLine { x: gamePlay.width+640; y: 100;}
             PathAttribute { name: "iconScale"; value: 0.5 }/*
             PathLine { x: gamePlay.width+240+gamePlay.width/2; y: 200;}
             PathAttribute { name: "iconScale"; value: 1 }*/
