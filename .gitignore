@@ -13,8 +13,10 @@ explodethem_installer.pkg
 explodethem_reg.rss
 explodethem_stub.pkg
 explodethem_template.pkg
-moc/
-obj/
+explodethem-build*
+*/moc/
+*/obj/
+*/rcc/
 *.user
 *.deb
 *.changes

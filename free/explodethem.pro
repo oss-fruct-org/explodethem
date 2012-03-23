@@ -1,13 +1,13 @@
 # Add more folders to ship with the application, here
-#folder_01.source = qml/symbian
-folder_01.source = qml/meego
+folder_01.source = qml/symbian
+#folder_01.source = qml/meego
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
-symbian:TARGET.UID3 = 0x2006179f
+symbian:TARGET.UID3 = 0xE4483312#0x2006179f
 
 # Smart Installer package's UID
 # This UID is from the protected range and therefore the package will
@@ -59,12 +59,15 @@ gameclassify.files += qtc_packaging/debian_harmattan/explodethem.conf
 gameclassify.path = /usr/share/policy/etc/syspart.conf.d
 INSTALLS += gameclassify
 
+RESOURCES += res.qrc
 symbian{
-    RESOURCES += res.qrc
 
     my_deployment.pkg_prerules += vendorinfo
 
     DEPLOYMENT += my_deployment
 
     vendorinfo += "%{\"FRUCT lab\"}" ":\"FRUCT lab\""
+    contains(DEFINES, IN_APP_PURCHASE) {
+        include(./qiap/in-app-purchase.pri)
+    }
 }
