@@ -231,7 +231,7 @@ Page {
 
     Component.onCompleted: {
         for(var i=0; i<UI.COL_COUNT*UI.ROW_COUNT; i++)
-            gameModel.model.append({t: 0, upD:UI.NULL, downD:UI.NULL, rightD:UI.NULL,leftD:UI.NULL, audio: gameModel.getRandomInt(0,1)})
+            gameModel.model.append({t: 0, upD:UI.NULL, downD:UI.NULL, rightD:UI.NULL,leftD:UI.NULL, water: false})
     }
     onStatusChanged: {
         if(gamePlay.status === PageStatus.Activating)

@@ -21,7 +21,7 @@ WorkerScript.onMessage = function(msg) {
         WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': needNext, 'isMoved':isMoved })
     } else if(msg.action === 'touch'){
         var type = msg.model.get(msg.id).t
-        if(type === 3){
+        if(type >= 3){
             msg.model.set(msg.id, {t: 0, upD: msg.id - COL_COUNT, downD: msg.id+ COL_COUNT, leftD: msg.id-1,rightD: msg.id+1})
             WorkerScript.sendMessage({ 'needBang': true, 'needNext': false, 'isMoved': true})
         } else if (type > 0){
@@ -46,7 +46,7 @@ WorkerScript.onMessage = function(msg) {
             } else {
                 rand=getRandomInt(0,6+(msg.level-(msg.level%2))/2)
                 if(rand === 3)
-                    msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
+                    msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:true})
                 else if(rand === 2 || rand === 1 || rand === 0)
                     msg.model.set(i,{t: 2, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
                 else
@@ -72,12 +72,21 @@ function check(i,model){
             if(type === 0 ){
                 model.set(i,{downD: downD + COL_COUNT})
             } else if(type === 3) {
+                if(model.get(i).water)
+                    model.set(downD,{t: type-1})
+                else{
+                    model.set(downD,{t: 0,downD: downD,upD: downD,leftD: downD ,rightD: downD })
+                    needBang = true
+                    addBang(downD)
+                }
                 model.set(i,{downD: NULL})
-                model.set(downD,{t: 0,downD: downD,upD: downD,leftD: downD ,rightD: downD })
-                needBang = true
-                addBang(downD)
             } else {
-                model.set(downD,{t: type+1})
+                if(model.get(i).water){
+                    if(type !==1)
+                        model.set(downD,{t: type-1})
+                }
+                else
+                    model.set(downD,{t: type+1})
                 model.set(i,{downD: NULL})
             }
         } else {
@@ -90,14 +99,23 @@ function check(i,model){
             type = model.get(upD).t
             if(type === 0){
                 model.set(i,{upD: upD - COL_COUNT})
-            } else if(type === 3) {
+            } else if(type === 3 ) {
+                if(model.get(i).water)
+                    model.set(upD,{t: type-1})
+                else{
+                    model.set(upD,{t: 0,upD: upD - COL_COUNT,downD: upD + COL_COUNT,
+                                  leftD: upD - 1,rightD: upD + 1})
+                    needBang = true
+                    addBang(upD)
+                }
                 model.set(i,{upD: NULL})
-                model.set(upD,{t: 0,upD: upD - COL_COUNT,downD: upD + COL_COUNT,
-                              leftD: upD - 1,rightD: upD + 1})
-                needBang = true
-                addBang(upD)
             } else {
-                model.set(upD,{t: type+1})
+                if(model.get(i).water){
+                    if(type !==1)
+                        model.set(upD,{t: type-1})
+                }
+                else
+                    model.set(upD,{t: type+1})
                 model.set(i,{upD: NULL})
             }
         } else {
@@ -111,13 +129,22 @@ function check(i,model){
             if(type === 0){
                 model.set(i,{leftD: leftD - 1})
             } else if(type === 3 ) {
+                if(model.get(i).water)
+                    model.set(leftD,{t: type-1})
+                else{
+                    model.set(leftD, {t: 0, upD: leftD - COL_COUNT,downD: leftD + COL_COUNT,
+                                  leftD: leftD - 1, rightD: leftD + 1})
+                    needBang = true
+                    addBang(leftD)
+                }
                 model.set(i,{leftD: NULL})
-                model.set(leftD, {t: 0, upD: leftD - COL_COUNT,downD: leftD + COL_COUNT,
-                              leftD: leftD - 1, rightD: leftD + 1})
-                needBang = true
-                addBang(leftD)
             } else {
-                model.set(leftD,{t: type+1})
+                if(model.get(i).water){
+                    if(type !==1)
+                        model.set(leftD,{t: type-1})
+                }
+                else
+                    model.set(leftD,{t: type+1})
                 model.set(i,{leftD: NULL})
             }
         } else {
@@ -131,12 +158,21 @@ function check(i,model){
             if(type === 0){
                 model.set(i,{rightD: rightD + 1})
             } else if(type === 3 ) {
+                if(model.get(i).water)
+                    model.set(rightD,{t: type-1})
+                else{
+                    model.set(rightD, {t: 0,upD: rightD,downD: rightD,leftD: rightD,rightD: rightD})
+                    needBang = true
+                    addBang(rightD)
+                }
                 model.set(i,{rightD: NULL})
-                model.set(rightD, {t: 0,upD: rightD,downD: rightD,leftD: rightD,rightD: rightD})
-                needBang = true
-                addBang(rightD)
             } else {
-                model.set(rightD,{t: type+1})
+                if(model.get(i).water){
+                    if(type !==1)
+                        model.set(rightD,{t: type-1})
+                }
+                else
+                    model.set(rightD,{t: type+1})
                 model.set(i,{rightD: NULL})
             }
         } else {

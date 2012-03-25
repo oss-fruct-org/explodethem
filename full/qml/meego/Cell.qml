@@ -14,7 +14,9 @@ Rectangle {
 
     Image {
         id: bombIcon
-        source: if(t === 1){
+        source: if(water){
+                    return "images/waterbomb.png"
+                } else if(t === 1){
                     return "images/bomb.png"
                 } else if( t === 2) {
                     return "images/bomb-bandage.png"
@@ -23,25 +25,10 @@ Rectangle {
                 } else
                     return ""
         anchors.centerIn: parent
-        height: /*if(t === 1){
-                    return 7*parent.width/12
-                } else if( t === 2) {
-                    return 4*parent.width/5
-                } else if(t === 3){
-                    return*/ parent.width/*
-                } else
-                    return 0*/
-
+        height: parent.width
         width: height
 
     }
-
-    /*AnimatedImage {
-        id : bombs
-        source: "images/bombs.gif"
-        paused: true
-        //visible: false
-    }*/
     AnimatedImage {
         id : bang;
         source: "images/bang2.gif"
@@ -58,7 +45,7 @@ Rectangle {
 
     states: [State {
                 name: "big"
-                when: (t === 3)
+                when: (t === 3 || t === 4)
                 PropertyChanges {target: bombIcon; height: cellMain.height}
                 PropertyChanges {target: bang; currentFrame: 0}
                 PropertyChanges {target: bang; paused: true}
