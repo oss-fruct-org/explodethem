@@ -51,13 +51,3 @@ OTHER_FILES += \
 gameclassify.files += qtc_packaging/debian_harmattan/explodethemfull.conf
 gameclassify.path = /usr/share/policy/etc/syspart.conf.d
 INSTALLS += gameclassify
-
-symbian{
-    RESOURCES += res.qrc
-
-    my_deployment.pkg_prerules += vendorinfo
-
-    DEPLOYMENT += my_deployment
-
-    vendorinfo += "%{\"FRUCT lab\"}" ":\"FRUCT lab\""
-}

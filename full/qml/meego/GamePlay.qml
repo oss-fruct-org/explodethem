@@ -237,7 +237,6 @@ Page {
         if(gamePlay.status === PageStatus.Activating)
             if(difficult !== -1){
                 gameModel.timer.start()
-                console.log("false start")
             }
         else if(gamePlay.status === PageStatus.Deactivating)
             gameModel.timer.stop()

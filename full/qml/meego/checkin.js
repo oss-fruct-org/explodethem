@@ -39,7 +39,7 @@ WorkerScript.onMessage = function(msg) {
         WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': false, 'isMoved': true})
     } else if(msg.action === 'startLevel'){
         var rand
-        for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
+        /*for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
             rand=getRandomInt(0,3)
             if(rand === 2){
                 msg.model.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
@@ -53,7 +53,26 @@ WorkerScript.onMessage = function(msg) {
                     msg.model.set(i,{t: 1, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
             }
             //msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
+        }*/
+        var big = getBig(msg.level)
+        var medium = getMedium(msg.level)
+        var space = getSpace(msg.level)
+        var water = 2
+        for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
+            rand=getRandomInt(1,COL_COUNT*ROW_COUNT)
+            if(rand <= big){
+                msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            } else if(rand <= big+medium){
+                msg.model.set(i,{t: 2, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            } else if(rand <= big+medium+space){
+                msg.model.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            } else if(rand <= big+medium+space+water){
+                msg.model.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:true})
+            } else {
+                msg.model.set(i,{t: 1, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            }
         }
+
     }
     msg.model.sync();
 }
@@ -72,9 +91,10 @@ function check(i,model){
             if(type === 0 ){
                 model.set(i,{downD: downD + COL_COUNT})
             } else if(type === 3) {
-                if(model.get(i).water)
-                    model.set(downD,{t: type-1})
-                else{
+                if(model.get(i).water){
+                    if(!model.get(downD).water)
+                        model.set(downD,{t: type-1})
+                } else {
                     model.set(downD,{t: 0,downD: downD,upD: downD,leftD: downD ,rightD: downD })
                     needBang = true
                     addBang(downD)
@@ -100,9 +120,10 @@ function check(i,model){
             if(type === 0){
                 model.set(i,{upD: upD - COL_COUNT})
             } else if(type === 3 ) {
-                if(model.get(i).water)
-                    model.set(upD,{t: type-1})
-                else{
+                if(model.get(i).water){
+                    if(!model.get(upD).water)
+                        model.set(upD,{t: type-1})
+                } else {
                     model.set(upD,{t: 0,upD: upD - COL_COUNT,downD: upD + COL_COUNT,
                                   leftD: upD - 1,rightD: upD + 1})
                     needBang = true
@@ -129,9 +150,10 @@ function check(i,model){
             if(type === 0){
                 model.set(i,{leftD: leftD - 1})
             } else if(type === 3 ) {
-                if(model.get(i).water)
-                    model.set(leftD,{t: type-1})
-                else{
+                if(model.get(i).water){
+                    if(!model.get(leftD).water)
+                        model.set(leftD,{t: type-1})
+                } else {
                     model.set(leftD, {t: 0, upD: leftD - COL_COUNT,downD: leftD + COL_COUNT,
                                   leftD: leftD - 1, rightD: leftD + 1})
                     needBang = true
@@ -158,9 +180,10 @@ function check(i,model){
             if(type === 0){
                 model.set(i,{rightD: rightD + 1})
             } else if(type === 3 ) {
-                if(model.get(i).water)
-                    model.set(rightD,{t: type-1})
-                else{
+                if(model.get(i).water){
+                    if(!model.get(rightD).water)
+                        model.set(rightD,{t: type-1})
+                } else {
                     model.set(rightD, {t: 0,upD: rightD,downD: rightD,leftD: rightD,rightD: rightD})
                     needBang = true
                     addBang(rightD)
@@ -199,4 +222,31 @@ function needHide(id, root){
 function addBang(id){
     temp[index] = id
     index++
+}
+
+function getBig(level){
+    if(level < 2)
+        return 6
+    else if(level < 4)
+        return 5
+    else if(level < 6)
+        return 4
+    else if(level < 8)
+        return 3
+    else if(level < 10)
+        return 2
+    else
+        return 1
+}
+function getMedium(level){
+    if(level < 14)
+       return 18 - level
+    else
+        return 3
+}
+function getSpace(level){
+    if(level < 14)
+        return 7+level;
+    else
+        return 20;
 }
