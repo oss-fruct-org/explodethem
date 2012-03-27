@@ -1,6 +1,8 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import com.nokia.symbian 1.1
+import IAP 1.0
+import Qt 4.7
+import "UIConstants.js" as UI
 
 PageStackWindow {
 
@@ -10,13 +12,16 @@ PageStackWindow {
     GamePlay {
         id: gamePlay
     }
-
     HighScores {
         id:highScores
     }
 
     GameHelp{
         id:gameHelp
+    }
+
+    BuyPage{
+        id:buyPage
     }
 
     ToolBarLayout {
@@ -35,6 +40,7 @@ PageStackWindow {
         visualParent: pageStack
         MenuLayout {
             MenuItem { text: qsTr("About"); onClicked:{aboutDialog.open()}}
+            MenuItem { text: qsTr("Buy"); onClicked: {pageStack.push(buyPage)}}
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
@@ -58,8 +64,35 @@ PageStackWindow {
             aboutDialog.close()
         }
     }
+
+    QtObject{
+        id: gameMode
+        property int type: UI.FREE
+    }
+
+    QIap {
+        id:iap_manager
+        onPurchaseCompleted: {
+           console.log("onPurchaseCompleted")
+           console.log(">"+status)
+           console.log(">"+productID)
+
+            if( status==="OK") {
+               if( productID === "813279" ) {
+                   console.log(iap_manager.getDRMFileContent(productID,"video.csv"));
+               } else
+               if( productID === "821073" ) {
+                   console.log(iap_manager.getDRMFileContent(productID,"photo.txt"));
+               }
+           }
+       }
+    }
+
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
     FontLoader{id: statusFont; source: "coolvetica.ttf"}
 
+    Component.onCompleted: {
+        //console.log(iap_manager.isPurchased("SBK Photo"))
+    }
 }

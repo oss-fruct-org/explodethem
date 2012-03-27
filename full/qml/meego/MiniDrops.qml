@@ -5,10 +5,7 @@ import "UIConstants.js" as UI
 Item {
     id:miniItems
     property string source: water ? "images/mini-drop.png" : "images/mini-fire.png"
-    property int w: 20
-    property int h: 20
     property int sec: 40
-    property int vel: 200
     property int velocity: UI.VELOCITY
     width: (gamePlay.width / UI.COL_COUNT) - (UI.CELL_SPACING); height: width
 

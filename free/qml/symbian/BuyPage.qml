@@ -6,7 +6,7 @@ import IAP 1.0
 import Qt 4.7
 
 Page{
-    id:gameHelp
+    id:buyPage
     orientationLock: PageOrientation.LockPortrait
     tools: ToolBarLayout {
         visible: true
@@ -18,26 +18,16 @@ Page{
         ToolButton {
             iconSource: "toolbar-add"
             anchors.right: (parent === undefined) ? undefined : parent.right
-            onClicked: iap_manager.purchaseProductByName("SBK Photo")
+            onClicked: console.log(iap_manager.purchaseProductByName("SBK Photo"))//iap_manager.purchaseProductByID("813279")
         }
     }
 
-    QIap {
-        id:iap_manager
-        onPurchaseCompleted: {
-           console.log("onPurchaseCompleted")
-           console.log(">"+status)
-           console.log(">"+productID)
-
-            if( status==="OK") {
-               if( productID === "813279" ) {
-                   text_purchased.text = iap_manager.getDRMFileContent(productID,"video.csv");
-               } else
-               if( productID === "821073" ) {
-                   text_purchased.text = iap_manager.getDRMFileContent(productID,"photo.txt");
-               }
-           }
-       }
+    Text{
+        id: text_purchased
+        anchors.centerIn: parent
+        text: "none"
     }
+
+
 
 }

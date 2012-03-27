@@ -13,3 +13,6 @@ var HELP_FONT_SIZE = 23;
 var INPUT_SIZE = 130
 var SCORES_LIST_ITEM_HEIGHT = 35
 var MAX_LENGHT = 7
+
+var FREE = 0
+var FULL = 1

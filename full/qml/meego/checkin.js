@@ -31,7 +31,7 @@ WorkerScript.onMessage = function(msg) {
     } else if(msg.action === 'splash'){
         needBang = false;
         for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
-            if(msg.model.get(i).t === 3){
+            if(msg.model.get(i).t === 3 && !msg.model.get(i).water){
                 needBang = true
                 msg.model.set(i,{t: 0, upD: i - COL_COUNT, downD: i+ COL_COUNT, leftD: i-1,rightD: i+1})
             }

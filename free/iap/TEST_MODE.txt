@@ -1,3 +1,2 @@
 [simulation]
 815952=simulated_ok
-#default=simulated_ok

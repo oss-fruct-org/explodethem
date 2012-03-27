@@ -62,12 +62,13 @@ INSTALLS += gameclassify
 RESOURCES += res.qrc
 symbian{
 
+    DEFINES += IN_APP_PURCHASE
+    DEFINES += IN_APP_PURCHASE_DEBUG
+    DEFINES += IA_PURCHASE_TEST_MODE
     my_deployment.pkg_prerules += vendorinfo
 
     DEPLOYMENT += my_deployment
 
     vendorinfo += "%{\"FRUCT lab\"}" ":\"FRUCT lab\""
-    contains(DEFINES, IN_APP_PURCHASE) {
-        include(./qiap/in-app-purchase.pri)
-    }
+    include(./qiap/in-app-purchase.pri)
 }
