@@ -4,6 +4,7 @@ var needBang = false
 var NULL = -30
 var needNext = true;
 var isMoved = false;
+var splash = false;
 var temp = new Array(ROW_COUNT*COL_COUNT)
 var index = 0
 
@@ -29,14 +30,16 @@ WorkerScript.onMessage = function(msg) {
             WorkerScript.sendMessage()
         }
     } else if(msg.action === 'splash'){
+        splash = false;
         needBang = false;
         for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
             if(msg.model.get(i).t === 3 && !msg.model.get(i).water){
                 needBang = true
+                splash = true
                 msg.model.set(i,{t: 0, upD: i - COL_COUNT, downD: i+ COL_COUNT, leftD: i-1,rightD: i+1})
             }
         }
-        WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': false, 'isMoved': true})
+        WorkerScript.sendMessage({ 'needBang': needBang, 'needNext': false, 'isMoved': true, 'splash': splash})
     } else if(msg.action === 'startLevel'){
         var rand
         /*for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){

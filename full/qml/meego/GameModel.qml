@@ -66,7 +66,6 @@ Item{
                 if(!gameModel.isInProgress()){
                     worker.sendMessage({'action': 'splash', 'model': listModel});
                     gamePlay.touched = true
-                    shake--
                     timer.start()
                 }
             }
@@ -93,6 +92,8 @@ Item{
             }
             if(messageObject.needBang)
                 bang()
+            if(messageObject.splash)
+                shake--
         }
     }
 
