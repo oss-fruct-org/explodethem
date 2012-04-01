@@ -1,8 +1,11 @@
 import QtQuick 1.1
 import "UIConstants.js" as UI
 import QtMobility.sensors 1.2
+import "logic.js" as Logic
 Item{
     id: gameModel
+
+    property bool useWorker: true
 
     property alias model: listModel
     property alias timer: timer
@@ -26,22 +29,30 @@ Item{
     }
 
     function move() {
-        var msg = {'action': 'move', 'model': listModel};
-        if(worker !== null)
+        if(useWorker){
+            var msg = {'action': 'move', 'model': listModel};
             worker.sendMessage(msg);
+        }else
+            Logic.move()
     }
 
 
 
     function touch(id){
-        var msg = {'action': 'touch', 'model': listModel, 'id': id};
-        worker.sendMessage(msg);
+        if(useWorker){
+            var msg = {'action': 'touch', 'model': listModel, 'id': id};
+            worker.sendMessage(msg);
+        }else
+            Logic.touch(id)
         timer.start()
     }
 
     function startLevel(__level){
-        var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
-        worker.sendMessage(msg);
+        if(useWorker){
+            var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
+            worker.sendMessage(msg);
+        }else
+            Logic.startLevel(__level)
 
     }
     function test(){
@@ -64,7 +75,10 @@ Item{
         onReadingChanged: {
             if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>100 && shake>0){
                 if(!gameModel.isInProgress()){
-                    worker.sendMessage({'action': 'splash', 'model': listModel});
+                    if(useWorker)
+                        worker.sendMessage({'action': 'splash', 'model': listModel});
+                    else
+                        Logic.shaked()
                     gamePlay.touched = true
                     timer.start()
                 }
@@ -97,6 +111,25 @@ Item{
         }
     }
 
+    Item{
+        id:pseudoWorker
+        signal message(bool needBang, bool needNext, bool isMoved)
+        onMessage:{
+            if(needNext && gamePlay.difficult !== -1)
+                gameModel.goNextLevel()
+            if(!isMoved){
+                timer.stop()
+                gameModel.stopped()
+            }
+            if(needBang)
+                bang()
+            if(useWorker)
+                if(splash)
+                    shake--
+        }
+    }
+
+
     Timer {
         id:timer
         running: false
@@ -113,9 +146,5 @@ Item{
             else{
             }
         }
-    }
-    Component.onDestruction: {
-       /* worker.source = ""
-        worker.destroy()*/
     }
 }
