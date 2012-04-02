@@ -5,7 +5,7 @@ import "logic.js" as Logic
 Item{
     id: gameModel
 
-    property bool useWorker: true
+    property bool useWorker: false
 
     property alias model: listModel
     property alias timer: timer

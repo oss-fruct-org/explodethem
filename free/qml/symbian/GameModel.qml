@@ -1,5 +1,6 @@
 import QtQuick 1.1
 import "UIConstants.js" as UI
+import "logic.js" as Logic
 Item{
     id: gameModel
 
@@ -10,6 +11,7 @@ Item{
     property bool needNext: false
     property bool isMoved: false
     property int tempCount: 0
+    property bool useWorker: false
 
     signal nextlevel
     signal scoreUp
@@ -26,21 +28,30 @@ Item{
     }
 
     function move() {
-        var msg = {'action': 'move', 'model': listModel};
-        worker.sendMessage(msg);
+        if(useWorker){
+            var msg = {'action': 'move', 'model': listModel};
+            worker.sendMessage(msg);
+        }
+        else
+            Logic.move()
     }
 
 
     function touch(id){
-        var msg = {'action': 'touch', 'model': listModel, 'id': id};
-        worker.sendMessage(msg);
+        if(useWorker){
+            var msg = {'action': 'touch', 'model': listModel, 'id': id};
+            worker.sendMessage(msg);
+        } else
+            Logic.touch(id)
         timer.start()
     }
 
     function startLevel(__level){
-        var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
-        worker.sendMessage(msg);
-
+        if(useWorker){
+            var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
+            worker.sendMessage(msg);
+        } else
+            Logic.startLevel(__level)
     }
     function test(){
         for(var i = 0;i < UI.COL_COUNT*UI.ROW_COUNT; i++){
@@ -72,6 +83,23 @@ Item{
             }
             if(messageObject.needBang)
                 bang()
+        }
+    }
+    Item{
+        id:pseudoWorker
+        signal message(bool needBang, bool needNext, bool isMoved)
+        onMessage:{
+            if(needNext /*&& gamePlay.difficult !== -1*/)
+                gameModel.goNextLevel()
+            if(!isMoved){
+                timer.stop()
+                gameModel.stopped()
+            }
+            if(needBang)
+                bang()
+            /*if(useWorker)
+                if(splash)
+                    shake--*/
         }
     }
 

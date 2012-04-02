@@ -1,6 +1,7 @@
 import QtQuick 1.1
 import "UIConstants.js" as UI
 import QtMobility.sensors 1.2
+import "logic.js" as Logic
 Item{
     id: gameModel
 
@@ -10,6 +11,7 @@ Item{
     property bool needNext: false
     property bool isMoved: false
     property int tempCount: 0
+    property bool useWorker: false
 
     signal nextlevel
     signal scoreUp
@@ -26,23 +28,30 @@ Item{
     }
 
     function move() {
-        var msg = {'action': 'move', 'model': listModel};
-        if(worker !== null)
+        if(useWorker){
+            var msg = {'action': 'move', 'model': listModel};
             worker.sendMessage(msg);
+        } else
+            Logic.move()
     }
 
 
 
     function touch(id){
-        var msg = {'action': 'touch', 'model': listModel, 'id': id};
-        worker.sendMessage(msg);
+        if(useWorker){
+            var msg = {'action': 'touch', 'model': listModel, 'id': id};
+            worker.sendMessage(msg);
+        } else
+            Logic.touch(id)
         timer.start()
     }
 
     function startLevel(__level){
-        var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
-        worker.sendMessage(msg);
-
+        if(useWorker){
+            var msg = {'action': 'startLevel', 'model': listModel, 'level': __level};
+            worker.sendMessage(msg);
+        } else
+            Logic.startLevel(__level)
     }
     function test(){
         for(var i = 0;i < UI.COL_COUNT*UI.ROW_COUNT; i++){
@@ -54,28 +63,6 @@ Item{
         timer.stop()
         nextlevel()
     }
-    Accelerometer{
-        id:sens
-        property double preX: 0
-        property double preY: 0
-        property double preZ: 0
-        active: true
-        dataRate: 2
-        onReadingChanged: {
-            if((reading.x-preX)*(reading.x-preX)+(reading.y-preY)*(reading.y-preY)>100 && shake>0){
-                if(!gameModel.isInProgress()){
-                    worker.sendMessage({'action': 'splash', 'model': listModel});
-                    gamePlay.touched = true
-                    shake--
-                    timer.start()
-                }
-            }
-            preX = reading.x; preY = reading.y; preZ = reading.z
-        }
-        onSensorError: {
-            console.log(sens.error)
-        }
-    }
     ListModel {
          id: listModel
     }
@@ -85,7 +72,7 @@ Item{
         source: "checkin.js"
 
         onMessage:{
-            if(messageObject.needNext && gamePlay.difficult !== -1)
+            if(messageObject.needNext)
                 gameModel.goNextLevel()
             if(!messageObject.isMoved){
                 timer.stop()
@@ -93,6 +80,24 @@ Item{
             }
             if(messageObject.needBang)
                 bang()
+        }
+    }
+
+    Item{
+        id:pseudoWorker
+        signal message(bool needBang, bool needNext, bool isMoved)
+        onMessage:{
+            if(needNext /*&& gamePlay.difficult !== -1*/)
+                gameModel.goNextLevel()
+            if(!isMoved){
+                timer.stop()
+                gameModel.stopped()
+            }
+            if(needBang)
+                bang()
+            /*if(useWorker)
+                if(splash)
+                    shake--*/
         }
     }
 

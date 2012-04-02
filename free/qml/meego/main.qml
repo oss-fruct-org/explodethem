@@ -38,7 +38,7 @@ PageStackWindow {
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
-            MenuItem { text: qsTr("Restart"); onClicked: levelDialog.open()}
+            MenuItem { text: qsTr("Restart"); onClicked: gamePlay.init}
             MenuItem { text: qsTr("Quit"); onClicked: Qt.quit()}
         }
     }
@@ -77,7 +77,7 @@ PageStackWindow {
     FontLoader{id: statusFont; source: "coolvetica.ttf"}
 
 
-    Dialog{
+    /*Dialog{
         id: levelDialog
         signal privateClicked
         content:Column{
@@ -133,6 +133,6 @@ PageStackWindow {
     Component.onCompleted: {
         //fullVersion.open()
         levelDialog.open()
-    }
+    }*/
 
 }

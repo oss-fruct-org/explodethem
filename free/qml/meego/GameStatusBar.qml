@@ -38,15 +38,6 @@ Image {
         styleColor: "black"
         color:"white"
     }
-    Text{
-        id:explodedText
-        anchors{left: levelText.left; top:levelText.bottom}
-        text: qsTr("Shake: ") + shake
-        font{pixelSize: UI.FONT_SIZE; family: statusFont.name}
-        style: Text.RichText
-        styleColor: "black"
-        color:"white"
-    }
 
     ScrollingDigits {
         id:sparksDigit

@@ -131,12 +131,20 @@ Page{
     }
 
     Button{
+        id: playAgainButton
         text: qsTr("Play again")
         visible: highScores.current !== -2
         anchors{top: list.bottom; topMargin: 20; horizontalCenter: parent.horizontalCenter}
         onClicked: {
             pageStack.pop()
             gamePlay.init()
+        }
+    }
+    Button{
+        text: qsTr("Buy pro version")
+        anchors{top: playAgainButton.bottom; topMargin: 15; horizontalCenter: parent.horizontalCenter}
+        onClicked: {
+            Qt.openUrlExternally("http://store.ovi.com/content/265834")
         }
     }
 

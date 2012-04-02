@@ -169,7 +169,7 @@ Page {
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
-                text:qsTr("Your score: ")+gamePlay.exploded//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }

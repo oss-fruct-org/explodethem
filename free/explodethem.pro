@@ -59,9 +59,8 @@ gameclassify.files += qtc_packaging/debian_harmattan/explodethem.conf
 gameclassify.path = /usr/share/policy/etc/syspart.conf.d
 INSTALLS += gameclassify
 
-RESOURCES += res.qrc
 symbian{
-
+    RESOURCES += res.qrc
     DEFINES += IN_APP_PURCHASE
     DEFINES += IN_APP_PURCHASE_DEBUG
     DEFINES += IA_PURCHASE_TEST_MODE
