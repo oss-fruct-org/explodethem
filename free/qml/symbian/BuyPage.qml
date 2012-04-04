@@ -22,12 +22,27 @@ Page{
         }
     }
 
+    QIap {
+        id:iap_manager
+        onPurchaseCompleted: {
+           console.log("onPurchaseCompleted")
+           console.log(">"+status)
+           console.log(">"+productID)
+
+            if( status==="OK") {
+               if( productID === "813279" ) {
+                   console.log(iap_manager.getDRMFileContent(productID,"video.csv"));
+               } else
+               if( productID === "821073" ) {
+                   console.log(iap_manager.getDRMFileContent(productID,"photo.txt"));
+               }
+           }
+       }
+    }
+
     Text{
         id: text_purchased
         anchors.centerIn: parent
         text: "none"
     }
-
-
-
 }

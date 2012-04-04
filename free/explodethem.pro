@@ -21,7 +21,7 @@ symbian:TARGET.CAPABILITY += NetworkServices
 symbian:{
     ICON = explodethem.svg
     DEPLOYMENT.display_name = Explode Them
-    VERSION = 1.0.1
+    VERSION = 1.0.2
 }
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
@@ -69,5 +69,5 @@ symbian{
     DEPLOYMENT += my_deployment
 
     vendorinfo += "%{\"FRUCT lab\"}" ":\"FRUCT lab\""
-    include(./qiap/in-app-purchase.pri)
+    #include(./qiap/in-app-purchase.pri)
 }

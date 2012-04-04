@@ -5,7 +5,9 @@ import "UIConstants.js" as UI
 Rectangle {
     id:nextLevelDialog
 
+
     signal accepted
+
     function open(){
         state = "open"
     }

@@ -3,7 +3,7 @@
 //#include <QDebug>
 //#include "model.h"
 #include "qmlapplicationviewer.h"
-#include "qiap/qiap.h"
+//#include "qiap/qiap.h"
 #include <QtDeclarative>
 
 
@@ -18,9 +18,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }*/
 
   // qmlRegisterType<MyModel>("models", 1, 0, "MyModel");
-    qmlRegisterType<QIap>("IAP", 1, 0, "QIap");
+   // qmlRegisterType<QIap>("IAP", 1, 0, "QIap");
     QmlApplicationViewer viewer;
-    viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
+    viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     //viewer.setMainQmlFile(QLatin1String("qml/meego/main.qml"));
     viewer.setMainQmlFile(QLatin1String("qml/symbian/main.qml"));
     viewer.showExpanded();

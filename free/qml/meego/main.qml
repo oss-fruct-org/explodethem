@@ -24,12 +24,16 @@ PageStackWindow {
         id: commonTools
         visible: true
         ToolIcon {
+            platformIconId: "toolbar-content-ovi-music"
+            anchors.left: (parent === undefined) ? undefined : parent.left
+            onClicked: Qt.openUrlExternally("http://store.ovi.com/content/265834")
+        }
+        ToolIcon {
             platformIconId: "toolbar-view-menu"
             anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
         }
     }
-
     Menu {
         id: myMenu
         visualParent: pageStack
@@ -38,7 +42,7 @@ PageStackWindow {
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
-            MenuItem { text: qsTr("Restart"); onClicked: gamePlay.init}
+            MenuItem { text: qsTr("New Game"); onClicked: gamePlay.init()}
             MenuItem { text: qsTr("Quit"); onClicked: Qt.quit()}
         }
     }
@@ -75,64 +79,5 @@ PageStackWindow {
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
     FontLoader{id: statusFont; source: "coolvetica.ttf"}
-
-
-    /*Dialog{
-        id: levelDialog
-        signal privateClicked
-        content:Column{
-
-            Text{
-                text:qsTr("Select difficulty level")
-                x:-15
-                color: "white"
-                font.pixelSize:UI.FONT_SIZE
-            }
-            Item {
-                width: 20
-                height: 25
-            }
-
-        }
-        buttons: [
-            Column{
-                Button{
-                    text: qsTr("Hard")
-                    onClicked: {
-                        gamePlay.difficult = UI.HARD
-                        levelDialog.accept()
-                    }
-                }Item {
-                    width: 20
-                    height: 25
-                }Button{
-                    text: qsTr("Medium")
-                    onClicked: {
-                        gamePlay.difficult = UI.MEDIUM
-                        levelDialog.accept()
-                    }
-                }Item {
-                    width: 20
-                    height: 25
-                }Button{
-                    text: qsTr("Easy")
-                    onClicked: {
-                        gamePlay.difficult = UI.EASY
-                        levelDialog.accept()
-                    }
-                }
-            }
-        ]
-
-        onPrivateClicked: {}
-        onAccepted: {
-            gamePlay.init()
-        }
-
-    }
-    Component.onCompleted: {
-        //fullVersion.open()
-        levelDialog.open()
-    }*/
 
 }

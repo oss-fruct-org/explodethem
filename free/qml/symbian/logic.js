@@ -68,19 +68,16 @@ function startLevel(level){
     var big = getBig(level)
     var medium = getMedium(level)
     var space = getSpace(level)
-    var water = 2
     for(var i = 0;i < COL_COUNT*ROW_COUNT; i++){
         rand=getRandomInt(1,COL_COUNT*ROW_COUNT)
         if(rand <= big){
-            listModel.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            listModel.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
         } else if(rand <= big+medium){
-            listModel.set(i,{t: 2, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            listModel.set(i,{t: 2, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
         } else if(rand <= big+medium+space){
-            listModel.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
-        } else if(rand <= big+medium+space+water){
-            listModel.set(i,{t: 3, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:true})
+            listModel.set(i,{t: 0, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
         } else {
-            listModel.set(i,{t: 1, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL, water:false})
+            listModel.set(i,{t: 1, upD:NULL, downD:NULL, rightD:NULL,leftD:NULL})
         }
     }
 }

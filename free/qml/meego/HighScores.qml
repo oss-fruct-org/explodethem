@@ -28,7 +28,6 @@ Page{
     orientationLock: PageOrientation.LockPortrait
 
     tools: ToolBarLayout {
-
         ToolIcon {
             platformIconId: "toolbar-back"
             anchors.left: (parent === undefined) ? undefined : parent.left
@@ -141,7 +140,7 @@ Page{
         }
     }
     Button{
-        text: qsTr("Buy pro version")
+        text: qsTr("Buy PRO version")
         anchors{top: playAgainButton.bottom; topMargin: 15; horizontalCenter: parent.horizontalCenter}
         onClicked: {
             Qt.openUrlExternally("http://store.ovi.com/content/265834")

@@ -129,6 +129,7 @@ Page {
         id:gameModel
         onNextlevel: {
             bombSound.stop()
+            nextLevelDialog.click = true
             nextLevelDialog.open()
         }
         onBang: {
@@ -146,12 +147,18 @@ Page {
 
     QueryDialog {
         id: nextLevelDialog
+
+        property bool click: false
+
         icon: "images/bomb4.png"
         titleText: qsTr("Next Level")
         message: qsTr("+1 sparks")
         onPrivateClicked: {
-            gameModel.startLevel(++gamePlay.level)
-            gamePlay.sparks++
+            if(nextLevelDialog.click){
+                nextLevelDialog.click = false
+                gameModel.startLevel(++gamePlay.level)
+                gamePlay.sparks++
+            }
         }
     }
 

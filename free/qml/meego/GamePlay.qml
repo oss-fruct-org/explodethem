@@ -88,8 +88,8 @@ Page {
                     onExploded: {
                         if(touched){
                             gamePlay.exploded++
-                            gamePlay.score += 10*gamePlay.rate
-                            if(count === gamePlay.difficult){
+                            gamePlay.score++
+                            if(count === 5){
                                 gamePlay.sparks++
                                 gamePlay.count = 0
                             } else {
@@ -154,15 +154,15 @@ Page {
         content:Column{
             Image{
                 source: "images/bomb5.png"
+                x: 50
             }
-
             Text{
                 text:qsTr("Game Over")
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE*1.6
             }
             Text{
-                text:qsTr("Your score: ")+gamePlay.exploded//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
+                text:qsTr("Your score: ")+gamePlay.score//+"\n"+qsTr("Best score: ")+gamePlay.bestScore
                 color: "white"
                 font.pixelSize:UI.FONT_SIZE
             }
@@ -186,7 +186,7 @@ Page {
             }
             Item {
                 width: 20
-                height: 25
+                height: 15
             }
 
         }
@@ -229,7 +229,7 @@ Page {
     }
     onStatusChanged: {
         if(gamePlay.status === PageStatus.Activating)
-                gameModel.timer.start()
+            gameModel.timer.start()
         else if(gamePlay.status === PageStatus.Deactivating)
             gameModel.timer.stop()
     }

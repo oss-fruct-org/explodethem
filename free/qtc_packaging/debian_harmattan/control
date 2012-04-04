@@ -8,7 +8,7 @@ Homepage: <http://oss.fruct.org/projects/explode_them>
 
 Package: explodethem
 Architecture: any
-Depends:  qt-components, libqtm-sensors, libqtm-multimedia, libqt4-declarative, libqt4-core (>= 4.7), libqt4-gui (>= 4.7), ${shlibs:Depends}, ${misc:Depends}
+Depends:  qt-components, libqtm-multimedia, libqt4-declarative, libqt4-core (>= 4.7), libqt4-gui (>= 4.7), ${shlibs:Depends}, ${misc:Depends}
 Description: Game arcade
  Explode Them is game arcade developed in Qt Quick. The main goal of the game to explode as many bombs until spark did not end.
 XSBC-Maemo-Display-Name: Explode Them

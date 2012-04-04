@@ -1,6 +1,5 @@
 import QtQuick 1.1
 import com.nokia.symbian 1.1
-import IAP 1.0
 import Qt 4.7
 import "UIConstants.js" as UI
 
@@ -20,9 +19,9 @@ PageStackWindow {
         id:gameHelp
     }
 
-    BuyPage{
+    /*BuyPage{
         id:buyPage
-    }
+    }*/
 
     ToolBarLayout {
         id: commonTools
@@ -40,7 +39,7 @@ PageStackWindow {
         visualParent: pageStack
         MenuLayout {
             MenuItem { text: qsTr("About"); onClicked:{aboutDialog.open()}}
-            MenuItem { text: qsTr("Buy"); onClicked: {pageStack.push(buyPage)}}
+            //MenuItem { text: qsTr("Buy"); onClicked: {pageStack.push(buyPage)}}
             MenuItem { text: qsTr("Help"); onClicked:{pageStack.push(gameHelp)}}
             //MenuItem { text: qsTr("More app"); onClicked:{Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")}}
             MenuItem { text: qsTr("HighScores"); onClicked:{pageStack.push(highScores); highScores.current = -2}}
@@ -54,7 +53,7 @@ PageStackWindow {
         titleText: qsTr("Explode Them 1.0")
         acceptButtonText: "Other apps"
         rejectButtonText: "Close"
-        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park\nof Petrozavodsk State University.")
+        message: qsTr("Copyright © 2012 FRUCT Lab in IT-park of Petrozavodsk State University. Main developer is Artemov Nikita")
 
         onAccepted: {
             Qt.openUrlExternally("http://store.ovi.com/publisher/FRUCT/")
@@ -70,23 +69,6 @@ PageStackWindow {
         property int type: UI.FREE
     }
 
-    QIap {
-        id:iap_manager
-        onPurchaseCompleted: {
-           console.log("onPurchaseCompleted")
-           console.log(">"+status)
-           console.log(">"+productID)
-
-            if( status==="OK") {
-               if( productID === "813279" ) {
-                   console.log(iap_manager.getDRMFileContent(productID,"video.csv"));
-               } else
-               if( productID === "821073" ) {
-                   console.log(iap_manager.getDRMFileContent(productID,"photo.txt"));
-               }
-           }
-       }
-    }
 
     FontLoader{id: someFont; source: "Colleged.ttf"}
     FontLoader{id: helpFont; source: "OneDirection.ttf"}
